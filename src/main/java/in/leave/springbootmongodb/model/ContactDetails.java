@@ -10,8 +10,8 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ContactDetails {
-	private String mobileNO;
-	private String email;
-	private String skype;
+	private String mobileNo;
+	private String emailId;
+	private String skypeId;
 
 }

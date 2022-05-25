@@ -1,5 +1,7 @@
 package in.leave.springbootmongodb.model;
 
+import javax.persistence.Enumerated;
+
 import org.springframework.data.annotation.Id;
 
 import lombok.AllArgsConstructor;
@@ -16,9 +18,13 @@ public class Employee {
 	private String id;
 	private String employeeName;
 	private String employeePost;
-	private boolean employeeLeave;
+	private int employeeLeave = 40;
+	private String employeeRemainingLeave;
 	private ContactDetails contactDetails;
-	private String remainingLeave;
+	@Enumerated
+	private String Leave;
+	
+	
 	
 
 }
