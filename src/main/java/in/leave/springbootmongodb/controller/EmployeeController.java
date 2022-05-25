@@ -30,5 +30,10 @@ public class EmployeeController {
 			return repository.save(request);
 
 		}
+
+	}
+
+	public String calculate(@RequestBody String id) {
+		return employeeHelper.calculateLeave(id);
 	}
 }

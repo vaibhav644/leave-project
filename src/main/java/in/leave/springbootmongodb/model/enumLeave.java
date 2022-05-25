@@ -1,12 +1,15 @@
 package in.leave.springbootmongodb.model;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public enum enumLeave {
 	fullLeave,
 	halfLeave;
 
 
 public int fullLeave() {
-	if (getStatus( )== fullLeave) {
+	if (getStatus()== fullLeave) {
 		return fullLeave();
 	}
 	return 2;

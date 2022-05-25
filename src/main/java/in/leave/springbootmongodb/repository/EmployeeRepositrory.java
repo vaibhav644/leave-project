@@ -8,11 +8,11 @@ import in.leave.springbootmongodb.model.Employee;
 @Component
 
 public interface EmployeeRepositrory extends MongoRepository<Employee, String> {
-
-//	public static Employee getById(String id) {
-//
-//		return null;
-
 	public Employee findById();
+
+	public static Employee getById(String id) {
+
+		return null;
+	}
 
 }
