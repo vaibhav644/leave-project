@@ -23,8 +23,5 @@ public class Employee {
 	private ContactDetails contactDetails;
 	@Enumerated
 	private String Leave;
-	
-	
-	
 
 }
