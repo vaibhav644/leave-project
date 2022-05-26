@@ -11,13 +11,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import in.leave.springbootmongodb.model.Employee;
-import in.leave.springbootmongodb.repository.EmployeeRepositrory;
+import in.leave.springbootmongodb.model.LeaveTypeEnum;
+import in.leave.springbootmongodb.repository.EmployeeRepository;
 
 @RestController
 @RequestMapping("/Employee")
 public class EmployeeController {
 	@Autowired
-	private EmployeeRepositrory repository;
+	EmployeeRepository repository;
 
 	@GetMapping("get/{id}")
 	public Optional<Employee> getById(@PathVariable String id) {
@@ -26,14 +27,23 @@ public class EmployeeController {
 
 	@PostMapping("/")
 	public Employee create(@RequestBody Employee request) {
-		{
-			return repository.save(request);
-
-		}
-
+		return repository.save(request);
 	}
+	
+	
+	
+	
+	@PostMapping("/getLeavesStatus")
+	public LeaveStatusResp getLeavesStatus(@RequestBody String id) {
+		Optional<Employee> employeeDetail = repository.findById(id);
+		return employeeHelper.getLeavesDetail(employeeDetail);
+	}
+	
+	
 
-	public String calculate(@RequestBody String id) {
-		return employeeHelper.calculateLeave(id);
+	@PostMapping("/getApproval")
+	public String calculate(@RequestBody LeaveRequest request) {
+		Optional<Employee> employeeDetail = repository.findById(request.getEmployeeId());
+		return employeeHelper.getLeaveApproval(employeeDetail.get(), request);
 	}
 }

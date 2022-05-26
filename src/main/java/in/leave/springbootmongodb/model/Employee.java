@@ -14,14 +14,14 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Employee {
+
 	@Id
 	private String id;
 	private String employeeName;
 	private String employeePost;
-	private int employeeLeave = 40;
-	private String employeeRemainingLeave;
 	private ContactDetails contactDetails;
-	@Enumerated
-	private String Leave;
+	private int employeeLeave = 40;
+	private int employeeRemainingLeave;
+	private LeaveTypeEnum leaveType;
 
 }
