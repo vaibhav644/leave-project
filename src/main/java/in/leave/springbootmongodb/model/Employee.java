@@ -1,7 +1,5 @@
 package in.leave.springbootmongodb.model;
 
-import javax.persistence.Enumerated;
-
 import org.springframework.data.annotation.Id;
 
 import lombok.AllArgsConstructor;
