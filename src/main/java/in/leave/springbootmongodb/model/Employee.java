@@ -21,5 +21,6 @@ public class Employee {
 	private int employeeLeave = 40;
 	private int employeeRemainingLeave;
 	private LeaveTypeEnum leaveType;
+	
 
 }

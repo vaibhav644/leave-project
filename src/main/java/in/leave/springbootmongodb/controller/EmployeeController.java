@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import in.leave.springbootmongodb.model.Employee;
 import in.leave.springbootmongodb.repository.EmployeeRepository;
@@ -23,20 +24,46 @@ public class EmployeeController {
 	@Autowired
 	EmployeeHelper employeeHelper;
 
+//	@GetMapping("get/{id}")
+//	public Optional<Employee> getById(@PathVariable String id) {
+//
+//		
+//		return repository.findById(id);
+//	}
 	@GetMapping("get/{id}")
-	public Optional<Employee> getById(@PathVariable String id) {
-		return repository.findById(id);
+	public ModelAndView findById(@PathVariable String id) {
+		Optional<Employee> employee =  repository.findById(id);
+	    ModelAndView modelAndView = new ModelAndView("hello.html");
+	    modelAndView.addObject("Employee", "employee");
+	    return modelAndView;
 	}
-
 	@PostMapping("/save")
 	public Employee create(@RequestBody Employee request) {
 		return repository.save(request);
 	}
 
-	@PutMapping("/update/{id}")
-	public Employee update(@PathVariable int id, @RequestBody Employee employeeObj) {
-		return repository.save(employeeObj);
-	}
+//	@PutMapping("/update/{id}")
+//	public Employee update(@PathVariable int id, @RequestBody Employee employeeObj)  {
+//		//TODO
+//		//1. find by ID
+//		//2. set employeeObj details to the object found by find method
+//	
+//		return repository.save(employeeObj);
+//	}
+	
+	
+	
+//	@PutMapping("/user")
+//	public ResponseEntity < Employee > updateUser(@RequestBody Employee employee) throws 
+//	URISyntaxException {
+//	   // log.debug("REST request to update User : {}", employee);
+//	    if (employee.getId() == null) {
+//	        throw new Exception("User id should not be null ")
+//	    
+//	    Employee result = repository.save(employee);
+//	    return ResponseEntity.ok().body(result);
+//	}
+//	}
 
 	@DeleteMapping("/del/{id}")
 	public String delete(@PathVariable String id) {
@@ -48,17 +75,7 @@ public class EmployeeController {
 			throw new RuntimeException("Employee not found for the id" + id);
 		}
 	}
-
-	/*
-	 * private Optional<Employee> update(@PathVariable String id) {
-	 * Optional<Employee> employee = repository.findById(id);
-	 * repository.delete(employee); repository.save(updatedEmployee);
-	 * 
-	 * EmployeeRepository updateEmployee = updatedEmployee; employee =
-	 * repository.update(updatedEmployee); return employee;
-	 * 
-	 * }
-	 */
+	
 	@PostMapping("/getLeavesStatus")
 	public LeaveStatusResp getLeavesStatus(@RequestBody String id) {
 		Optional<Employee> employeeDetail = repository.findById(id);
@@ -70,4 +87,7 @@ public class EmployeeController {
 		Employee employeeDetail = repository.getById(request.getEmployeeId());
 		return employeeHelper.getLeaveApproval(employeeDetail, request);
 	}
+	
+	
+	
 }
