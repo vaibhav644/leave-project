@@ -15,7 +15,7 @@ public class EmployeeHelper {
 	@Autowired
 	private EmployeeRepository repository;
 
-	public  String getLeaveApproval(Employee employee, LeaveRequest request) {
+	public String getLeaveApproval(Employee employee, LeaveRequest request) {
 		String respString = "";
 		// TODO: need to build logic for this method
 //		int totalLeaves = employee.getEmployeeLeave();
@@ -25,17 +25,24 @@ public class EmployeeHelper {
 				respString = "Appproved";
 				leavesLeft = leavesLeft - 2;
 				employee.setEmployeeRemainingLeave(leavesLeft);
-				repository.save(null);
-			
+				repository.save(updateEmployee(repository.getById(employee.getId()), employee));
+				Employee test = repository.getById(employee.getId());
+				int x = test.getEmployeeRemainingLeave();
+
 			} else if (leavesLeft == 1) {
 				respString = "Not Appproved : But you can apply for a half Day leave";
 			} else {
 				respString = "Not Approved : No paid leaves are available, BUT you can have a unPaid leave";
 			}
-			
+
 		} else if (request.getLeaveType().compareTo(LeaveTypeEnum.HALF_TIME) == 0) {
 			if (leavesLeft >= 1) {
 				respString = "Appproved";
+				leavesLeft = leavesLeft - 1;
+				employee.setEmployeeRemainingLeave(leavesLeft);
+				repository.save(updateEmployee(repository.getById(employee.getId()), employee));
+				Employee test = repository.getById(employee.getId());
+				int Y = test.getEmployeeRemainingLeave();
 				leavesLeft = leavesLeft - 1;
 			} else {
 				respString = "Not Approved : No paid leaves are available, BUT you can have a unPaid leave";
@@ -45,9 +52,28 @@ public class EmployeeHelper {
 		}
 		return respString;
 	}
-	
 
-	public  LeaveStatusResp getLeavesDetail(Optional<Employee> employeeDetail) {
+//	 public ResponseEntity getUpdated <Employee> updateEmployee(
+//		      @PathVariable(value = "id") String EmployeeId, @Valid @RequestBody Employee employeeDetails)
+//		      throws ConfigDataResourceNotFoundException {
+//		    Employee employee =repository.findById(EmployeeId). orElseThrow();
+//		    employee.setEmployeeName(employeeDetails.getEmployeeName());
+//		    employee.setContactDetails(employeeDetails.getContactDetails());
+//		    employee.setEmployeePost(employeeDetails.getEmployeePost());
+//		    employee.setLeaveType(employeeDetails.getLeaveType());
+//		    Employee updatedemployee = repository.save(employee);
+//		    return ResponseEntity.ok(updatedemployee);
+//		  }
+	public Employee updateEmployee(Employee existingEmployeeDetail, Employee newEmployeeDetail) {
+		existingEmployeeDetail.setEmployeeName(newEmployeeDetail.getEmployeeName());
+		existingEmployeeDetail.setContactDetails(newEmployeeDetail.getContactDetails());
+		existingEmployeeDetail.setEmployeePost(newEmployeeDetail.getEmployeePost());
+		existingEmployeeDetail.setLeaveType(newEmployeeDetail.getLeaveType());
+		existingEmployeeDetail.setEmployeeRemainingLeave(newEmployeeDetail.getEmployeeRemainingLeave());
+		return existingEmployeeDetail;
+	}
+
+	public LeaveStatusResp getLeavesDetail(Optional<Employee> employeeDetail) {
 		// TODO: need to write logic for this method
 		LeaveStatusResp leaveStatusResp = new LeaveStatusResp();
 		leaveStatusResp.setEmployeeLeave(employeeDetail.get().getEmployeeLeave());
@@ -55,5 +81,3 @@ public class EmployeeHelper {
 		return leaveStatusResp;
 	}
 }
-
-
