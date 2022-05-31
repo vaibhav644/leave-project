@@ -2,15 +2,67 @@
 
 <html xmlns:th="http://www.thymeleaf.org">
 
-  <head>
-    <title>leave management system</title>
-   
-  </head>
+<head>
+<title>leave management system</title>
 
-  <body>
-  
-    <p th:text="#{Employee.employeeName}">Welcome to our webpage!</p>
-  
-  </body>
 
+</head>
+<style>
+table tr th, table tr td {
+	padding: 5px;
+}
+</style>
+
+<body style="padding: 30px; font-family: arial;">
+
+	<style>
+table, tr {
+	border: 1px solid black;
+}
+</style>
+	
+
+	<form>
+		<table style="text-align: left; width: 100%; border: 1px solid green;">  
+			<tr>
+			</tr>
+			<tr>
+				<td>Id:</td>
+				<td style="width: 12%; color: blue;"><input type="text"
+					placeholder=employeeId id=""></td>
+			</tr>
+			<tr>
+				<td>employeeName:</td>
+				<td><input type="text" placeholder=employeeName value=""></td>
+			</tr>
+			<tr>
+				<td>employeePost:</td>
+				<td><input type="text" placeholder=employeePost value=""></td>
+			</tr>
+			<tr>
+				<td>mobileNo:</td>
+				<td><select>
+						<option>+91</option>
+						<option>+92</option>
+						<option>+977</option>
+						<option>+93</option>
+						<option>+1</option>
+						<option>+8</option>
+				</select><td><input type="text" placeholder=MobileNo value="">
+			</td></tr>
+			<tr>
+				<td>emailId:</td>
+				<td><input type="text" placeholder=emailId value=""></td>
+			</tr>
+			<tr>
+				<td>skypeId:</td>
+				<td><input type="text" placeholder=skypeId value=""></td>
+			</tr>
+			<tr>
+				<td><input type="submit" valuse></td>
+			</tr>
+		</table>
+	</form>
+
+</body>
 </html>

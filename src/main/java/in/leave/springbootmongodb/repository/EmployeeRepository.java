@@ -9,9 +9,7 @@ import in.leave.springbootmongodb.model.Employee;
 
 public interface EmployeeRepository extends MongoRepository<Employee, String> {
 
-//	Employee update(Employee request);
-//	Employee save(Employee student);
-//
+
 	Employee getById(String id);
 
 	

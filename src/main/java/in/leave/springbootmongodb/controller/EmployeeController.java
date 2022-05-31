@@ -1,9 +1,11 @@
 package in.leave.springbootmongodb.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,21 +28,38 @@ public class EmployeeController {
 	@Autowired
 	EmployeeHelper employeeHelper;
 
-//	@GetMapping("get/{id}")
-//	public Optional<Employee> getById(@PathVariable String id) {
-//
-//		
-//		return repository.findById(id);
-//	}
 	@GetMapping("get/{id}")
-	public ModelAndView findById(@PathVariable String id) {
-		Optional<Employee> employee =  repository.findById(id);
-	    ModelAndView modelAndView = new ModelAndView("hello.html");
-	    modelAndView.addObject("Employee", "employee");
-	    return modelAndView;
+	public Optional<Employee> getById(@PathVariable String id) {
+		return repository.findById(id);
 	}
-<<<<<<< HEAD
-=======
+
+	@GetMapping("/findAll")
+	public List<Employee> findAll() {
+		return repository.findAll();
+	}
+
+	@GetMapping("view/{id}")
+	public ModelAndView findById(@PathVariable String id) {
+		Optional<Employee> employee = repository.findById(id);
+		ModelAndView modelAndView = new ModelAndView("hello.html");
+		modelAndView.getModel().put("Employee", employee.get().getEmployeeName());
+		return modelAndView;
+	}
+
+	@GetMapping("/index")
+	public ModelAndView showUserList(Model model) {
+		ModelAndView modelAndView = new ModelAndView("index.html");
+		modelAndView.getModel().put("employees", repository.findAll());
+//		List<Employee> employeeList = repository.findAll();
+//		List<ContactDetails> contactList = new ArrayList<>();
+//		for (Employee employee : employeeList) {
+//			contactList.add(employee.getContactDetails());
+//		}
+//		if (contactList.size() > 0) {
+//			modelAndView.getModel().put("contactDetails", contactList);
+//		}
+		return modelAndView;
+	}
 
 	@PutMapping("/update/{id}")
 	public String pop(@PathVariable String id, @RequestBody Employee newEmployeeDetails) {
@@ -49,41 +68,17 @@ public class EmployeeController {
 		repository.save(updatedEmployee);
 		return "Update Successfully";
 	}
- 
->>>>>>> ae8b8e7bf8e8f6ab1f677e98f466a72f9c281a70
+
 	@PostMapping("/save")
 	public Employee create(@RequestBody Employee emp) {
 		return repository.save(emp);
 	}
-
-//	@PutMapping("/update/{id}")
-<<<<<<< HEAD
-//	public Employee update(@PathVariable int id, @RequestBody Employee employeeObj)  {
-//		//TODO
-//		//1. find by ID
-//		//2. set employeeObj details to the object found by find method
-//	
-//		return repository.save(employeeObj);
+//	@PostMapping("/ind")
+//	public ModelAndView create(Model model) {
+//		ModelAndView modelAndView = new ModelAndView("index.html");
+//		modelAndView.getModel().put("employees", repository.findAll());
+//		return modelAndView;
 //	}
-	
-	
-	
-//	@PutMapping("/user")
-//	public ResponseEntity < Employee > updateUser(@RequestBody Employee employee) throws 
-//	URISyntaxException {
-//	   // log.debug("REST request to update User : {}", employee);
-//	    if (employee.getId() == null) {
-//	        throw new Exception("User id should not be null ")
-//	    
-//	    Employee result = repository.save(employee);
-//	    return ResponseEntity.ok().body(result);
-//	}
-//	}
-=======
-//	public Employee update(@PathVariable int id, @RequestBody Employee employeeObj) {
-//		return repository.save(employeeObj);
-//	}
->>>>>>> ae8b8e7bf8e8f6ab1f677e98f466a72f9c281a70
 
 	@DeleteMapping("/del/{id}")
 	public String delete(@PathVariable String id) {
@@ -95,7 +90,7 @@ public class EmployeeController {
 			throw new RuntimeException("Employee not found for the id" + id);
 		}
 	}
-	
+
 	@PostMapping("/getLeavesStatus")
 	public LeaveStatusResp getLeavesStatus(@RequestBody String id) {
 		Optional<Employee> employeeDetail = repository.findById(id);
@@ -107,14 +102,5 @@ public class EmployeeController {
 		Employee employeeDetail = repository.getById(id.getEmployeeId());
 		return employeeHelper.getLeaveApproval(employeeDetail, id);
 	}
-	
-	@GetMapping("/register")
-	public String showForm() {
-		return "LeaveApplicationForm";
-	}
-	
-	
-	
+
 }
-
-

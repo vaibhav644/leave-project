@@ -1,13 +1,44 @@
 <!DOCTYPE html>
-<html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-<meta charset="ISO-8859-1">
-<title>Spring Boot Form Demo</title>
+<title>leave management system</title>
+<style>
+table, tr {
+  border: 1px solid black;
+  
+}
+</style>
 </head>
-<body>
-    <div align="center">
-        <h1>Spring Boot Form Demo</h1>
-        <a href="/register">Click here to register</a>
-    </div>
+<style>
+ table tr th, table tr td{padding:5px;}
+</style>
+
+<body style="padding:30px; font-family:arial;">
+
+	<table style="text-align: left; width: 100%;border: 1px solid green ;">
+		<tr  >
+			<th style="width: 12%;border: 1px solid darkblue; color:blue; " bgcolor="#ccc">ID</th>
+			<th style="width: 12%;border: 1px solid darkblue; color:blue;" bgcolor="#ccc">NAME</th>
+			<th style="width: 12%;border: 1px solid darkblue; color:blue;" bgcolor="#ccc">POST</th>
+			<th style="width: 12%;border: 1px solid darkblue; color:blue;" bgcolor="#ccc">E-Mail</th>
+			<th style="width: 12%;border: 1px solid darkblue; color:blue;" bgcolor="#ccc">MOBILE</th>
+			<th style="width: 12%;border: 1px solid darkblue; color:blue;" bgcolor="#ccc">SKYPE</th>
+
+		</tr>
+		
+		<tr th:each="employee : ${employees}">
+			<td style="width: 12%" bgcolor="lightgreen" th:text="${employee.id}"></td>
+			<td style="width: 12%"bgcolor="lightgreen" th:text="${employee.employeeName}"></td>
+			<td style="width: 12%"bgcolor="lightgreen" th:text="${employee.employeePost}"></td>
+			<td style="width: 12%"bgcolor="lightgreen" th:text="${employee.contactDetails.emailId}"></td>
+			<td style="width: 12%"bgcolor="lightgreen" th:text="${employee.contactDetails.mobileNo}"></td>
+			<td style="width: 12%"bgcolor="lightgreen" th:text="${employee.contactDetails.skypeId}"></td>
+		</tr>
+
+
+	</table>
+
 </body>
 </html>
