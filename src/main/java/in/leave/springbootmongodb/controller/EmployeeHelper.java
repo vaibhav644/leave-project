@@ -53,17 +53,6 @@ public class EmployeeHelper {
 		return respString;
 	}
 
-//	 public ResponseEntity getUpdated <Employee> updateEmployee(
-//		      @PathVariable(value = "id") String EmployeeId, @Valid @RequestBody Employee employeeDetails)
-//		      throws ConfigDataResourceNotFoundException {
-//		    Employee employee =repository.findById(EmployeeId). orElseThrow();
-//		    employee.setEmployeeName(employeeDetails.getEmployeeName());
-//		    employee.setContactDetails(employeeDetails.getContactDetails());
-//		    employee.setEmployeePost(employeeDetails.getEmployeePost());
-//		    employee.setLeaveType(employeeDetails.getLeaveType());
-//		    Employee updatedemployee = repository.save(employee);
-//		    return ResponseEntity.ok(updatedemployee);
-//		  }
 	public Employee updateEmployee(Employee existingEmployeeDetail, Employee newEmployeeDetail) {
 		existingEmployeeDetail.setEmployeeName(newEmployeeDetail.getEmployeeName());
 		existingEmployeeDetail.setContactDetails(newEmployeeDetail.getContactDetails());

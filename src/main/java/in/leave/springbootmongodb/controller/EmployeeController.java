@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -28,6 +29,12 @@ public class EmployeeController {
 	@Autowired
 	EmployeeHelper employeeHelper;
 
+	/**********************CRUD APIs*****************************/
+	@PostMapping("/save")
+	public Employee create(@RequestBody Employee emp) {
+		return repository.save(emp);
+	}
+
 	@GetMapping("get/{id}")
 	public Optional<Employee> getById(@PathVariable String id) {
 		return repository.findById(id);
@@ -37,30 +44,7 @@ public class EmployeeController {
 	public List<Employee> findAll() {
 		return repository.findAll();
 	}
-
-	@GetMapping("view/{id}")
-	public ModelAndView findById(@PathVariable String id) {
-		Optional<Employee> employee = repository.findById(id);
-		ModelAndView modelAndView = new ModelAndView("hello.html");
-		modelAndView.getModel().put("Employee", employee.get().getEmployeeName());
-		return modelAndView;
-	}
-
-	@GetMapping("/index")
-	public ModelAndView showUserList(Model model) {
-		ModelAndView modelAndView = new ModelAndView("index.html");
-		modelAndView.getModel().put("employees", repository.findAll());
-//		List<Employee> employeeList = repository.findAll();
-//		List<ContactDetails> contactList = new ArrayList<>();
-//		for (Employee employee : employeeList) {
-//			contactList.add(employee.getContactDetails());
-//		}
-//		if (contactList.size() > 0) {
-//			modelAndView.getModel().put("contactDetails", contactList);
-//		}
-		return modelAndView;
-	}
-
+	
 	@PutMapping("/update/{id}")
 	public String pop(@PathVariable String id, @RequestBody Employee newEmployeeDetails) {
 		Optional<Employee> existingEmployeeDetail = repository.findById(id);
@@ -68,18 +52,7 @@ public class EmployeeController {
 		repository.save(updatedEmployee);
 		return "Update Successfully";
 	}
-
-	@PostMapping("/save")
-	public Employee create(@RequestBody Employee emp) {
-		return repository.save(emp);
-	}
-//	@PostMapping("/ind")
-//	public ModelAndView create(Model model) {
-//		ModelAndView modelAndView = new ModelAndView("index.html");
-//		modelAndView.getModel().put("employees", repository.findAll());
-//		return modelAndView;
-//	}
-
+	
 	@DeleteMapping("/del/{id}")
 	public String delete(@PathVariable String id) {
 		Optional<Employee> employee = repository.findById(id);
@@ -89,6 +62,32 @@ public class EmployeeController {
 		} else {
 			throw new RuntimeException("Employee not found for the id" + id);
 		}
+	}
+	
+	/**************************Other APIs*****************************8*/
+
+	@GetMapping("/view/{id}")
+	public ModelAndView findById(@PathVariable String id) {
+		Optional<Employee> employee = repository.findById(id);
+		ModelAndView modelAndView = new ModelAndView("submit.html");
+		modelAndView.getModel().put("Employee", employee.get().getEmployeeName());
+		return modelAndView;
+	}
+
+//	@GetMapping("/index")
+//	public ModelAndView showUserList(@ModelAttribute("employee") Employee employee,Model model) {
+//		repository.save(employee);
+//		ModelAndView modelAndView = new ModelAndView("displayList.html");
+//		modelAndView.getModel().put("employees", repository.findAll());
+//		return modelAndView;
+//		
+//	}	
+	@GetMapping("/index")
+	public ModelAndView showUserList(Model model) {
+//		repository.save(employee);
+		ModelAndView modelAndView = new ModelAndView("displayList.html");
+		modelAndView.getModel().put("employees", repository.findAll());
+		return modelAndView;		
 	}
 
 	@PostMapping("/getLeavesStatus")
@@ -102,5 +101,6 @@ public class EmployeeController {
 		Employee employeeDetail = repository.getById(id.getEmployeeId());
 		return employeeHelper.getLeaveApproval(employeeDetail, id);
 	}
+	
 
 }

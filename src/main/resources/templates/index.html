@@ -1,44 +1,29 @@
 <!DOCTYPE html>
-
 <html xmlns:th="http://www.thymeleaf.org">
-
 <head>
-<title>leave management system</title>
-<style>
-table, tr {
-  border: 1px solid black;
-  
+<meta charset="ISO-8859-1">
+<title>SUBMIT EMPLOYEE</title>
+<style type="text/css">
+span{
+display: inline-block;
+width: 200px;
+text-align: left;
 }
 </style>
+
 </head>
-<style>
- table tr th, table tr td{padding:5px;}
-</style>
-
-<body style="padding:30px; font-family:arial;">
-
-	<table style="text-align: left; width: 100%;border: 1px solid green ;">
-		<tr  >
-			<th style="width: 12%;border: 1px solid darkblue; color:blue; " bgcolor="#ccc">ID</th>
-			<th style="width: 12%;border: 1px solid darkblue; color:blue;" bgcolor="#ccc">NAME</th>
-			<th style="width: 12%;border: 1px solid darkblue; color:blue;" bgcolor="#ccc">POST</th>
-			<th style="width: 12%;border: 1px solid darkblue; color:blue;" bgcolor="#ccc">E-Mail</th>
-			<th style="width: 12%;border: 1px solid darkblue; color:blue;" bgcolor="#ccc">MOBILE</th>
-			<th style="width: 12%;border: 1px solid darkblue; color:blue;" bgcolor="#ccc">SKYPE</th>
-
-		</tr>
+<body>
+	<div align="center">
+		<h1>submit succeeded!</h1>
 		
-		<tr th:each="employee : ${employees}">
-			<td style="width: 12%" bgcolor="lightgreen" th:text="${employee.id}"></td>
-			<td style="width: 12%"bgcolor="lightgreen" th:text="${employee.employeeName}"></td>
-			<td style="width: 12%"bgcolor="lightgreen" th:text="${employee.employeePost}"></td>
-			<td style="width: 12%"bgcolor="lightgreen" th:text="${employee.contactDetails.emailId}"></td>
-			<td style="width: 12%"bgcolor="lightgreen" th:text="${employee.contactDetails.mobileNo}"></td>
-			<td style="width: 12%"bgcolor="lightgreen" th:text="${employee.contactDetails.skypeId}"></td>
-		</tr>
-
-
-	</table>
+		<span>ID:</span><span th:text="${employee.id}"></span><br/>
+		<span>NAME:</span><span th:text="${employee.employeeName}"></span><br/>
+		<span>NAME:</span><span th:text="${employee.employeePost}"></span><br/>
+		<span>MOBILE-NO:</span><span th:text="${employee.contactDetails.mobileNo}"></span><br/>
+		<span>EMAIL-ID:</span><span th:text="${employee.contactDetails.emailId}"></span><br/>
+		<span>SKYPE-ID:</span><span th:text="${employee.contactDetails.skypeId}"></span><br/>
+		
+	</div>
 
 </body>
 </html>

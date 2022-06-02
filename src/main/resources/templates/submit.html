@@ -22,22 +22,23 @@ table, tr {
 </style>
 	
 
-	<form>
+	<form action="#" th:action="@{/Employee/index}" th:object="${employee}"
+			method="get">>
 		<table style="text-align: left; width: 100%; border: 1px solid green;">  
 			<tr>
 			</tr>
 			<tr>
 				<td>Id:</td>
 				<td style="width: 12%; color: blue;"><input type="text"
-					placeholder=employeeId id=""></td>
+					placeholder=employeeId value="employeeId"></td>
 			</tr>
 			<tr>
 				<td>employeeName:</td>
-				<td><input type="text" placeholder=employeeName value=""></td>
+				<td><input type="text" placeholder=employeeName value="employeeName"></td>
 			</tr>
 			<tr>
 				<td>employeePost:</td>
-				<td><input type="text" placeholder=employeePost value=""></td>
+				<td><input type="text" placeholder=employeePost value="employeePost"></td>
 			</tr>
 			<tr>
 				<td>mobileNo:</td>
@@ -48,18 +49,18 @@ table, tr {
 						<option>+93</option>
 						<option>+1</option>
 						<option>+8</option>
-				</select><td><input type="text" placeholder=MobileNo value="">
+				</select><td><input type="text" placeholder=MobileNo value="MobileNo">
 			</td></tr>
 			<tr>
 				<td>emailId:</td>
-				<td><input type="text" placeholder=emailId value=""></td>
+				<td><input type="text" placeholder=emailId value="emailId"></td>
 			</tr>
 			<tr>
 				<td>skypeId:</td>
-				<td><input type="text" placeholder=skypeId value=""></td>
+				<td><input type="text" placeholder=skypeId value="skypeId"></td>
 			</tr>
 			<tr>
-				<td><input type="submit" valuse></td>
+				<td><input type="submit" value= ""></td>
 			</tr>
 		</table>
 	</form>
