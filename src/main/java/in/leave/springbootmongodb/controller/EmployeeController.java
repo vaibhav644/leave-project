@@ -74,21 +74,21 @@ public class EmployeeController {
 		return modelAndView;
 	}
 
-//	@GetMapping("/index")
-//	public ModelAndView showUserList(@ModelAttribute("employee") Employee employee,Model model) {
-//		repository.save(employee);
-//		ModelAndView modelAndView = new ModelAndView("displayList.html");
-//		modelAndView.getModel().put("employees", repository.findAll());
-//		return modelAndView;
-//		
-//	}	
 	@GetMapping("/index")
-	public ModelAndView showUserList(Model model) {
-//		repository.save(employee);
+	public ModelAndView showUserList(@ModelAttribute("employee") Employee employee,Model model) {
+		repository.save(employee);
 		ModelAndView modelAndView = new ModelAndView("displayList.html");
 		modelAndView.getModel().put("employees", repository.findAll());
-		return modelAndView;		
-	}
+		return modelAndView;
+		
+	}	
+//	@GetMapping("/index")
+//	public ModelAndView showUserList(Model model) {
+////		repository.save(employee);
+//		ModelAndView modelAndView = new ModelAndView("displayList.html");
+//		modelAndView.getModel().put("employees", repository.findAll());
+//		return modelAndView;		
+//	}
 
 	@PostMapping("/getLeavesStatus")
 	public LeaveStatusResp getLeavesStatus(@RequestBody String id) {
