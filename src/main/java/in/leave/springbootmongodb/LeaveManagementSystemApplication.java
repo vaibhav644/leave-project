@@ -2,8 +2,8 @@ package in.leave.springbootmongodb;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
-
+import org.springframework.cache.annotation.EnableCaching;
+@EnableCaching
 @SpringBootApplication
 
 public class LeaveManagementSystemApplication {
