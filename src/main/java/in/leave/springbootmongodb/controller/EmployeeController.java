@@ -36,7 +36,7 @@ public class EmployeeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(EmployeeController.class);
 
-	/**********************CRUD APIs*****************************/
+	/********************** CRUD APIs *****************************/
 	@PostMapping("/save")
 	public Employee create(@RequestBody Employee emp) {
 		return repository.save(emp);
@@ -54,7 +54,7 @@ public class EmployeeController {
 	public List<Employee> findAll() {
 		return repository.findAll();
 	}
-	
+
 	@PutMapping("/update/{id}")
 	public String pop(@PathVariable String id, @RequestBody Employee newEmployeeDetails) {
 		Optional<Employee> existingEmployeeDetail = repository.findById(id);
@@ -62,8 +62,8 @@ public class EmployeeController {
 		repository.save(updatedEmployee);
 		return "Update Successfully";
 	}
-	
-	@DeleteMapping("/del/{id}")
+
+	@DeleteMapping("/{id}")
 	public String delete(@PathVariable String id) {
 		Optional<Employee> employee = repository.findById(id);
 		if (employee.isPresent()) {
@@ -73,25 +73,36 @@ public class EmployeeController {
 			throw new RuntimeException("Employee not found for the id" + id);
 		}
 	}
-	
-	/**************************Other APIs*****************************8*/
 
-	@GetMapping("/view/{id}")
-	public ModelAndView findById(@PathVariable String id) {
-		Optional<Employee> employee = repository.findById(id);
+	@DeleteMapping("/many")
+	public String deleteMany(@RequestBody List<Employee> list) {
+		for (Employee listElem : list) {
+			repository.delete(listElem);
+		}
+		return "Deletion Successful";
+	}
+
+	/************************** Other APIs*****************************8 */
+
+	// this api is redering the submit form UI
+	@GetMapping("/submit")
+	public ModelAndView findById(Model model) {
 		ModelAndView modelAndView = new ModelAndView("submit.html");
-		modelAndView.getModel().put("Employee", employee.get().getEmployeeName());
+		Employee emp = new Employee();
+		modelAndView.getModel().put("employee", emp);
 		return modelAndView;
 	}
 
-	@GetMapping("/index")
-	public ModelAndView showUserList(@ModelAttribute("employee") Employee employee,Model model) {
+	@PostMapping("/display")
+	public ModelAndView showUserList(@ModelAttribute("employee") Employee employee, Model model) {
 		repository.save(employee);
 		ModelAndView modelAndView = new ModelAndView("displayList.html");
 		modelAndView.getModel().put("employees", repository.findAll());
 		return modelAndView;
+
 		
 	}	
+
 
 	@PostMapping("/getLeavesStatus")
 	public LeaveStatusResp getLeavesStatus(@RequestBody String id) {
@@ -104,6 +115,5 @@ public class EmployeeController {
 		Employee employeeDetail = repository.getById(id.getEmployeeId());
 		return employeeHelper.getLeaveApproval(employeeDetail, id);
 	}
-	
 
 }

@@ -20,47 +20,46 @@ table, tr {
 	border: 1px solid black;
 }
 </style>
-	
 
-	<form action="#" th:action="@{/Employee/index}" th:object="${employee}"
-			method="get">
-		<table style="text-align: left; width: 100%; border: 1px solid green;">  
-			<tr>
-			</tr>
+	<p th:text="${Employee}"></p>
+	<form th:action="@{/Employee/display}" th:object="${employee}"
+		method="post">
+		<table style="text-align: left; width: 100%; border: 1px solid green;">
+
 			<tr>
 				<td>Id:</td>
 				<td style="width: 12%; color: blue;"><input type="text"
-					placeholder=employeeId value=""></td>
+					th:field="*{id}" placeholder=employeeId></td>
 			</tr>
 			<tr>
-				<td>employeeName:</td>
-				<td><input type="text" placeholder=employeeName value=""></td>
+				<td>NAME:</td>
+				<td style="width: 12%; color: blue;"><input type="text"
+					th:field="*{employeeName}" placeholder=employeeName value=""></td>
 			</tr>
 			<tr>
-				<td>employeePost:</td>
-				<td><input type="text" placeholder=employeePost value=""></td>
+				<td>POST:</td>
+				<td style="width: 12%; color: blue;"><input type="text"
+					th:field="*{employeePost}" placeholder=employeePost value=""></td>
 			</tr>
 			<tr>
-				<td>mobileNo:</td>
-				<td><select>
-						<option>+91</option>
-						<option>+92</option>
-						<option>+977</option>
-						<option>+93</option>
-						<option>+1</option>
-						<option>+8</option>
-				</select><td><input type="text" placeholder=MobileNo value="">
-			</td></tr>
-			<tr>
-				<td>emailId:</td>
-				<td><input type="text" placeholder=emailId value=""></td>
+				<td>MOBILE-NO:</td>
+				<td style="width: 12%; color: blue;"><input type="text"
+					 th:field="*{contactDetails.mobileNo}" placeholder=mobileNo value=""></td>
 			</tr>
 			<tr>
-				<td>skypeId:</td>
-				<td><input type="text" placeholder=skypeId value=""></td>
+				<td>EMAIL-ID:</td>
+				<td style="width: 12%; color: blue;"><input type="text"
+					 th:field="*{contactDetails.emailId}" placeholder=emailId value=""></td>
 			</tr>
 			<tr>
-				<td><input type="submit" value= "submit"></td>
+				<td>SKYPE-ID:</td>
+				<td style="width: 12%; color: blue;"><input type="text"
+					th:field="*{contactDetails.skypeId}" placeholder=skypeId value=""></td>
+			</tr>
+			
+
+			<tr>
+				<td><input type="submit" value="submit"></td>
 			</tr>
 		</table>
 	</form>
