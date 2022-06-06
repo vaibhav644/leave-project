@@ -50,7 +50,7 @@ public class EmployeeController {
 	}
 
 	@GetMapping("/findAll")
-	@Cacheable(key = "#id")
+//	@Cacheable(key = "id")
 	public List<Employee> findAll() {
 		return repository.findAll();
 	}
@@ -92,6 +92,13 @@ public class EmployeeController {
 		modelAndView.getModel().put("employee", emp);
 		return modelAndView;
 	}
+	@GetMapping("/leaves")
+	public ModelAndView leaves(Model model) {
+		ModelAndView modelAndView = new ModelAndView("leaveNew.html");
+		ApplyLeaveRequest applyLeaveRequest = new ApplyLeaveRequest();
+		modelAndView.getModel().put("applyLeaveRequest", applyLeaveRequest);
+		return modelAndView;
+	}
 
 	@PostMapping("/display")
 	public ModelAndView showUserList(@ModelAttribute("employee") Employee employee, Model model) {
@@ -99,14 +106,14 @@ public class EmployeeController {
 		ModelAndView modelAndView = new ModelAndView("displayList.html");
 		modelAndView.getModel().put("employees", repository.findAll());
 		return modelAndView;
+	}
+	
 
-		
-	}	
 
 
 	@PostMapping("/getLeavesStatus")
-	public LeaveStatusResp getLeavesStatus(@RequestBody String id) {
-		Optional<Employee> employeeDetail = repository.findById(id);
+	public LeaveStatusResp getLeavesStatus(@RequestBody ApplyLeaveRequest request) {
+		Optional<Employee> employeeDetail = repository.findById(request.getId());
 		return employeeHelper.getLeavesDetail(employeeDetail);
 	}
 

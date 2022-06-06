@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">>
+<head>
+<meta charset="ISO-8859-1">
+<title> Employee Management System</title>
+</head>
+<style>
+table tr th, table tr td {
+	padding: 15px;
+}
+</style>
+
+<body style="padding: 50px; font-family: arial;">
+
+	<style>
+table, tr {
+	border: 1px solid black;
+}
+</style>
+
+<body>
+ <div class="navbar navbar-inverse navbar-fixed-left" th:fragment="header">
+      <div class="container">
+        
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li th:classappend="${module == 'displayList' ? 'active' : ''}">
+              <a href="file:///C:/Users/virtu/OneDrive/Desktop/Thymeleaf%20Project/leave-project/src/main/resources/templates/displayList.html">View All</a>
+            </li>
+            <li th:classappend="${module == 'index' ? 'active' : ''}">
+              <a href="file:///C:/Users/virtu/OneDrive/Desktop/Thymeleaf%20Project/leave-project/src/main/resources/templates/index.html" th:href="">Add Employee</a>
+            </li>
+            <li th:classappend="${module == 'tasks' ? 'active' : ''}">
+              <a href="file:///C:/Users/virtu/OneDrive/Desktop/Thymeleaf%20Project/leave-project/src/main/resources/templates/Leaves.html" th:href="">Apply For Leave</a>
+            </li>
+          </ul>
+          
+        </div>
+      </div>
+    </div>
+</body>
+</html>

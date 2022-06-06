@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>leave management system</title>
+
+
+</head>
+<style>
+table tr th, table tr td {
+	padding: 5px;
+}
+table, tr {
+	border: 1px solid black;
+}
+</style>
+<body style="padding: 30px; font-family: arial;">
+
+
+	<p th:text="${ApplyLeaveRequest}"></p>
+	<form th:action="@{/Employee/getLeavesStatus}" th:object="${applyLeaveRequest}"
+		method="post">
+		<table style="text-align: left; width: 100%; border: 1px solid green;">
+
+			<tr>
+				<td>Id:</td>
+				<td style="width: 12%; color: blue;"><input type="text"
+					th:field="*{id}" placeholder=employeeId></td>
+			</tr>
+			<tr>
+				<td>LEAVE DAYS:</td>
+				<td style="width: 12%; color: blue;"><input type="text"
+					th:field="*{leaveDays}" placeholder=leaveDays value=""></td>
+			</tr>
+			<tr>
+				<td>LEAVE TYPE:</td>
+				<td style="width: 12%; color: blue;"><input type="text"
+					th:field="*{leaveType}" placeholder=LeaveTypeEnum value=""></td>
+			</tr>
+			<tr>
+				<td><input type="submit" value="submit"></td>
+			</tr>
+		</table>
+	</form>
+
+</body>
+</html>
