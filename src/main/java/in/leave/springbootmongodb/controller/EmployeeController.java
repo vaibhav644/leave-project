@@ -28,6 +28,11 @@ public class EmployeeController {
 	EmployeeRepository repository;
 	@Autowired
 	EmployeeHelper employeeHelper;
+<<<<<<< HEAD
+=======
+
+	private static final Logger logger = LoggerFactory.getLogger(EmployeeController.class);
+>>>>>>> 73a7fdb6844dc4a451812375fe5c84a1294503db
 
 	/********************** CRUD APIs *****************************/
 	@PostMapping("/save")
@@ -41,6 +46,10 @@ public class EmployeeController {
 	}
 
 	@GetMapping("/findAll")
+<<<<<<< HEAD
+=======
+//	@Cacheable(key = "id")
+>>>>>>> 73a7fdb6844dc4a451812375fe5c84a1294503db
 	public List<Employee> findAll() {
 		return repository.findAll();
 	}
@@ -83,25 +92,49 @@ public class EmployeeController {
 		return modelAndView;
 	}
 
-	@PostMapping("/display")
+	@GetMapping("/leaves")
+	public ModelAndView leaves(Model model) {
+		ModelAndView modelAndView = new ModelAndView("leave.html");
+		ApplyLeaveRequest applyLeaveRequest = new ApplyLeaveRequest();
+		modelAndView.getModel().put("applyLeaveRequest", applyLeaveRequest);
+		return modelAndView;
+	}
+
+	@PostMapping("/save/display")
 	public ModelAndView showUserList(@ModelAttribute("employee") Employee employee, Model model) {
 		repository.save(employee);
 		ModelAndView modelAndView = new ModelAndView("displayList.html");
 		modelAndView.getModel().put("employees", repository.findAll());
 		return modelAndView;
+	}
+	@GetMapping("/display")
+	public ModelAndView showUserList() {
+		ModelAndView modelAndView = new ModelAndView("displayList.html");
+		modelAndView.getModel().put("employees", repository.findAll());
+		return modelAndView;
+	}
 
+	@GetMapping("/main")
+	public ModelAndView main(Model model) {
+		ModelAndView modelAndView = new ModelAndView("main.html");
+			
+		return modelAndView;
 	}
 
 	@PostMapping("/getLeavesStatus")
-	public LeaveStatusResp getLeavesStatus(@RequestBody String id) {
-		Optional<Employee> employeeDetail = repository.findById(id);
+	public LeaveStatusResp getLeavesStatus(@ModelAttribute("applyLeaveRequest") ApplyLeaveRequest request,
+			Model model) {
+		Optional<Employee> employeeDetail = repository.findById(request.getId());
 		return employeeHelper.getLeavesDetail(employeeDetail);
 	}
 
 	@PostMapping("/getApproval")
-	public String calculate(@RequestBody LeaveRequest id) {
-		Employee employeeDetail = repository.getById(id.getEmployeeId());
-		return employeeHelper.getLeaveApproval(employeeDetail, id);
+	public String calculate(@ModelAttribute("applyLeaveRequest") ApplyLeaveRequest request, Model model) {
+		Employee employeeDetail = repository.getById(request.getId());
+		if (employeeDetail == null) {
+			throw new RuntimeException(String.format("ID = %s not found in Database", request.getId()));
+		}
+		return employeeHelper.getLeaveApproval(employeeDetail, request);
 	}
 
 }

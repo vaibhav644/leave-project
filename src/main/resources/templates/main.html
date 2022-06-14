@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org"
+	th:fragment="main-fragment (title, otherStaticResources, header, nav, mainContent, footer)">
+
+
+<head>
+<title>leave management system</title>
+</head>
+<style>
+* {
+	box-sizing: border-box;
+}
+
+header {
+	background-color: #666;
+	padding: 5px;
+	text-align: center;
+	font-size: 35px;
+	color: white;
+}
+
+nav {
+	float: left;
+	width: 20%;
+	height: 700px;
+	background: #ccc;
+	padding: 20px;
+}
+
+nav ul {
+	list-style-type: none;
+	padding: 0;
+}
+
+article {
+	float: left;
+	padding: 20px;
+	width: 70%;
+	background-color: #f1f1f1;
+	height: 700px;
+}
+
+section:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+footer {
+	background-color: #777;
+	text-align: center;
+	color: white;
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+}
+
+@media ( max-width : 600px) {
+	nav, article {
+		width: 100%;
+		height: auto;
+	}
+}
+</style>
+
+<body>
+	<p th:text="${Employee}"></p>
+
+	<header>
+		<h2>Virtue Analytics</h2>
+	</header>
+	<section>
+
+		<nav>
+
+			<ul>
+				<li><a th:href="@{/Employee/display}"
+					style="border: none; padding: 16px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: auto; transition-duration: 0.4s; cursor: pointer; background-color: #555555; color: white; margin: 50px;">View
+						All</a></li>
+				
+
+				<li><a th:href="@{/Employee/submit}"
+					style="border: none; padding: 16px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 1px; transition-duration: 0.4s; cursor: pointer; background-color: #555555; color: white; margin: 50px;">Add
+						Employee</a></li>
+				
+
+				<li><a th:href="@{/Employee/leaves}"
+					style="border: none; padding: 16px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; transition-duration: 0.4s; cursor: pointer; background-color: #555555; color: white; margin: 50px;">Apply
+						For Leave</a></li>
+				
+			</ul>
+
+		</nav>
+		<article>
+			<h1>Display</h1>
+			<p>Main content</p>
+		</article>
+	</section>
+	<footer>
+		<p>Footer</p>
+	</footer>
+</body>
+</html>

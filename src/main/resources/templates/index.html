@@ -1,29 +1,38 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">>
 <head>
 <meta charset="ISO-8859-1">
-<title>SUBMIT EMPLOYEE</title>
-<style type="text/css">
-span{
-display: inline-block;
-width: 200px;
-text-align: left;
+<title> Employee Management System</title>
+</head>
+<style>
+table tr th, table tr td {
+	padding: 15px;
+}
+table, tr {
+	border: 1px solid black;
 }
 </style>
 
-</head>
+<body style="padding: 50px; font-family: arial;">
 <body>
-	<div align="center">
-		<h1>submit succeeded!</h1>
-		
-		<span>ID:</span><span th:text="${employee.id}"></span><br/>
-		<span>NAME:</span><span th:text="${employee.employeeName}"></span><br/>
-		<span>NAME:</span><span th:text="${employee.employeePost}"></span><br/>
-		<span>MOBILE-NO:</span><span th:text="${employee.contactDetails.mobileNo}"></span><br/>
-		<span>EMAIL-ID:</span><span th:text="${employee.contactDetails.emailId}"></span><br/>
-		<span>SKYPE-ID:</span><span th:text="${employee.contactDetails.skypeId}"></span><br/>
-		
-	</div>
-
+ <div class="navbar navbar-inverse navbar-fixed-left" th:fragment="header">
+      <div class="container">
+        
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li th:classappend="${module == 'displayList' ? 'active' : ''}">
+              <a href="display.html">View All</a>
+            </li>
+            <li th:classappend="${module == 'index' ? 'active' : ''}">
+              <a href="" th:href="">Add Employee</a>
+            </li>
+            <li th:classappend="${module == 'tasks' ? 'active' : ''}">
+              <a href="" th:href="">Apply For Leave</a>
+            </li>
+          </ul>
+          
+        </div>
+      </div>
+    </div>
 </body>
 </html>

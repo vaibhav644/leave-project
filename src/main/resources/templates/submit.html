@@ -9,57 +9,63 @@
 </head>
 <style>
 table tr th, table tr td {
-	padding: 5px;
+	padding: 10px;
 }
-</style>
 
-<body style="padding: 30px; font-family: arial;">
-
-	<style>
 table, tr {
-	border: 1px solid black;
+	border: 3px solid black;
 }
 </style>
+<body
+	style="padding-top: 80px; padding-right: 120px; padding-bottom: 80px; padding-left: 120px; color: #fff; background-color: #f0f0f0; background: #0f2439 no-repeat center top;">
 
+	<h1 style="text-align: center">Employee Form</h1>
 	<p th:text="${Employee}"></p>
-	<form th:action="@{/Employee/display}" th:object="${employee}"
+	<form th:action="@{/Employee/save/display}" th:object="${employee}"
 		method="post">
-		<table style="text-align: left; width: 100%; border: 1px solid green;">
+		<table style="margin: auto; width: 391px;">
 
 			<tr>
-				<td>Id:</td>
-				<td style="width: 12%; color: blue;"><input type="text"
-					th:field="*{id}" placeholder=employeeId></td>
+
+				<td><input type="text" th:field="*{id}" placeholder="ID"
+					style="height: 35px; display: block; margin: auto; width: 250px; background-color: #3d4d685e; text-align: center; border-radius: 5px"></td>
 			</tr>
 			<tr>
-				<td>NAME:</td>
+
 				<td style="width: 12%; color: blue;"><input type="text"
-					th:field="*{employeeName}" placeholder=employeeName value=""></td>
+					th:field="*{employeeName}" placeholder="Name"
+					style="height: 35px; display: block; margin: auto; width: 250px; background-color: #3d4d685e; text-align: center; border-radius: 5px"></td>
 			</tr>
 			<tr>
-				<td>POST:</td>
+
 				<td style="width: 12%; color: blue;"><input type="text"
-					th:field="*{employeePost}" placeholder=employeePost value=""></td>
+					th:field="*{employeePost}" placeholder="Post"
+					style="height: 35px; display: block; margin: auto; width: 250px; background-color: #3d4d685e; text-align: center; border-radius: 5px"></td>
 			</tr>
 			<tr>
-				<td>MOBILE-NO:</td>
+
 				<td style="width: 12%; color: blue;"><input type="text"
-					 th:field="*{contactDetails.mobileNo}" placeholder=mobileNo value=""></td>
+					th:field="*{contactDetails.mobileNo}" placeholder="Contact"
+					style="height: 35px; display: block; margin: auto; width: 250px; background-color: #3d4d685e; text-align: center; border-radius: 5px"></td>
 			</tr>
 			<tr>
-				<td>EMAIL-ID:</td>
+
 				<td style="width: 12%; color: blue;"><input type="text"
-					 th:field="*{contactDetails.emailId}" placeholder=emailId value=""></td>
+					th:field="*{contactDetails.emailId}" placeholder="Email"
+					style="height: 35px; display: block; margin: auto; width: 250px; background-color: #3d4d685e; text-align: center; border-radius: 5px"></td>
 			</tr>
 			<tr>
-				<td>SKYPE-ID:</td>
+
 				<td style="width: 12%; color: blue;"><input type="text"
-					th:field="*{contactDetails.skypeId}" placeholder=skypeId value=""></td>
+					th:field="*{contactDetails.skypeId}" placeholder="Skype_ID"
+					style="height: 35px; display: block; margin: auto; width: 250px; background-color: #3d4d685e; text-align: center; border-radius: 5px"></td>
 			</tr>
-			
+
 
 			<tr>
-				<td><input type="submit" value="submit"></td>
+				<td><input type="submit"
+					style="margin: auto; display: block; background-color: #098cc8; width: 98%; height: 35px"
+					value="submit"></td>
 			</tr>
 		</table>
 	</form>
