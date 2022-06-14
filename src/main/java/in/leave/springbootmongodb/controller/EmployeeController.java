@@ -3,11 +3,7 @@ package in.leave.springbootmongodb.controller;
 import java.util.List;
 import java.util.Optional;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -27,14 +23,11 @@ import in.leave.springbootmongodb.repository.EmployeeRepository;
 @RestController
 @Component
 @RequestMapping("/Employee")
-@CacheConfig(cacheNames = { "Employees" })
 public class EmployeeController {
 	@Autowired
 	EmployeeRepository repository;
 	@Autowired
 	EmployeeHelper employeeHelper;
-	
-	private static final Logger logger = LoggerFactory.getLogger(EmployeeController.class);
 
 	/********************** CRUD APIs *****************************/
 	@PostMapping("/save")
@@ -43,14 +36,11 @@ public class EmployeeController {
 	}
 
 	@GetMapping("get/{id}")
-	@Cacheable(key = "#id")
 	public Optional<Employee> getById(@PathVariable String id) {
-		logger.info("Fetch From DB " + id);
 		return repository.findById(id);
 	}
 
 	@GetMapping("/findAll")
-	@Cacheable(key = "#id")
 	public List<Employee> findAll() {
 		return repository.findAll();
 	}
@@ -84,7 +74,7 @@ public class EmployeeController {
 
 	/************************** Other APIs*****************************8 */
 
-	// this api is redering the submit form UI
+	// this api is rendering the submit form UI
 	@GetMapping("/submit")
 	public ModelAndView findById(Model model) {
 		ModelAndView modelAndView = new ModelAndView("submit.html");
@@ -100,9 +90,7 @@ public class EmployeeController {
 		modelAndView.getModel().put("employees", repository.findAll());
 		return modelAndView;
 
-		
-	}	
-
+	}
 
 	@PostMapping("/getLeavesStatus")
 	public LeaveStatusResp getLeavesStatus(@RequestBody String id) {
