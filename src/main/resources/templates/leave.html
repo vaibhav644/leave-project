@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>leave management system</title>
+
+
+</head>
+<style>
+table tr th, table tr td {
+	padding: 5px;
+}
+
+table, tr {
+	border: 3px solid black;
+}
+</style>
+<body
+	style="padding-top: 80px; padding-right: 120px; padding-bottom: 80px; padding-left: 120px; color: #fff; background-color: #f0f0f0; background: #0f2439 no-repeat center top;">
+
+	<h1 style="text-align: center">Leave Form</h1>
+	<p th:text="${ApplyLeaveRequest}"></p>
+	<form th:action="@{/Employee/getApproval}"
+		th:object="${applyLeaveRequest}" method="post">
+		<table style="margin: auto; width: 391px;">
+
+			<tr>
+
+				<td style="width: 12%; color: blue;"><input type="text"
+					th:field="*{id}" placeholder="ID"
+					style="height: 35px; display: block; margin: auto; width: 250px; background-color: #3d4d685e; text-align: center; border-radius: 5px"></td>
+
+			</tr>
+			<tr>
+
+				<td style="width: 12%; color: blue;"><input type="text"
+					th:field="*{leaveDays}" placeholder="Days"
+					style="height: 35px; display: block; margin: auto; width: 250px; background-color: #3d4d685e; text-align: center; border-radius: 5px"></td>
+			</tr>
+			<tr>
+
+				<td style="width: 12%; color: blue; display: block; margin: auto;">
+					<select name="leaveType"
+					style="height: 35px; display: block; margin: auto; width: 123px; background-color: #3d4d685e; text-align: center; border-radius: 5px; margin-left: -30px;">
+						<option value="--select--" disabled selected>Leave Type</option>
+						<option
+							th:each="leaveOpt : ${T(in.leave.springbootmongodb.model.LeaveTypeEnum).values()}"
+							th:value="${leaveOpt}" th:text="${leaveOpt}"></option>
+				</select>
+				</td>
+			</tr>
+			<tr>
+				<td><input type="submit"
+					style="border-radius: 5px; background-color: #098cc8; margin: auto; display: block; width: 99%; height: 38px;"
+					value="submit"></td>
+			</tr>
+		</table>
+	</form>
+
+</body>
+</html>
