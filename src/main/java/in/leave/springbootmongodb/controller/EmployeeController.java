@@ -3,6 +3,8 @@ package in.leave.springbootmongodb.controller;
 import java.util.List;
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
@@ -28,11 +30,8 @@ public class EmployeeController {
 	EmployeeRepository repository;
 	@Autowired
 	EmployeeHelper employeeHelper;
-<<<<<<< HEAD
-=======
 
 	private static final Logger logger = LoggerFactory.getLogger(EmployeeController.class);
->>>>>>> 73a7fdb6844dc4a451812375fe5c84a1294503db
 
 	/********************** CRUD APIs *****************************/
 	@PostMapping("/save")
@@ -46,10 +45,7 @@ public class EmployeeController {
 	}
 
 	@GetMapping("/findAll")
-<<<<<<< HEAD
-=======
 //	@Cacheable(key = "id")
->>>>>>> 73a7fdb6844dc4a451812375fe5c84a1294503db
 	public List<Employee> findAll() {
 		return repository.findAll();
 	}
