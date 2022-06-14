@@ -36,6 +36,7 @@ public class EmployeeController {
 	/********************** CRUD APIs *****************************/
 	@PostMapping("/save")
 	public Employee create(@RequestBody Employee emp) {
+		emp.setEmployeeRemainingLeave(40);
 		return repository.save(emp);
 	}
 
@@ -98,6 +99,7 @@ public class EmployeeController {
 
 	@PostMapping("/save/display")
 	public ModelAndView showUserList(@ModelAttribute("employee") Employee employee, Model model) {
+		employee.setEmployeeRemainingLeave(40);
 		repository.save(employee);
 		ModelAndView modelAndView = new ModelAndView("displayList.html");
 		modelAndView.getModel().put("employees", repository.findAll());

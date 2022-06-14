@@ -1,105 +1,32 @@
 <!DOCTYPE html>
 
-<html xmlns:th="http://www.thymeleaf.org"
-	th:fragment="main-fragment (title, otherStaticResources, header, nav, mainContent, footer)">
-
-
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <title>leave management system</title>
 </head>
-<style>
-* {
-	box-sizing: border-box;
-}
 
-header {
-	background-color: #666;
-	padding: 5px;
-	text-align: center;
-	font-size: 35px;
-	color: white;
-}
+<body
+	style="padding-top: 80px; padding-right: 120px; padding-bottom: 80px; padding-left:; color: #fff; background-color: #f0f0f0; background: #0f2439 no-repeat center top;">
 
-nav {
-	float: left;
-	width: 20%;
-	height: 700px;
-	background: #ccc;
-	padding: 20px;
-}
 
-nav ul {
-	list-style-type: none;
-	padding: 0;
-}
-
-article {
-	float: left;
-	padding: 20px;
-	width: 70%;
-	background-color: #f1f1f1;
-	height: 700px;
-}
-
-section:after {
-	content: "";
-	display: table;
-	clear: both;
-}
-
-footer {
-	background-color: #777;
-	text-align: center;
-	color: white;
-	position: fixed;
-	left: 0;
-	bottom: 0;
-	width: 100%;
-}
-
-@media ( max-width : 600px) {
-	nav, article {
-		width: 100%;
-		height: auto;
-	}
-}
-</style>
-
-<body>
 	<p th:text="${Employee}"></p>
+	<h1 style="text-align: center">Virtue Analytics</h1>
 
-	<header>
-		<h2>Virtue Analytics</h2>
-	</header>
-	<section>
 
-		<nav>
+	<br>
+	<a th:href="@{/Employee/display}"
+		style="border: none; padding: 14px 50px; text-decoration: none; display: inline-block; font-size: 15px; margin: 4px 1px; cursor: pointer; background-color: #555555; color: white; margin: 40px;">ViewAll</a>
+	</br>
 
-			<ul>
-				<li><a th:href="@{/Employee/display}"
-					style="border: none; padding: 16px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: auto; transition-duration: 0.4s; cursor: pointer; background-color: #555555; color: white; margin: 50px;">View
-						All</a></li>
-				
-
-				<li><a th:href="@{/Employee/submit}"
-					style="border: none; padding: 16px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 1px; transition-duration: 0.4s; cursor: pointer; background-color: #555555; color: white; margin: 50px;">Add
-						Employee</a></li>
-				
-
-				<li><a th:href="@{/Employee/leaves}"
-					style="border: none; padding: 16px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; transition-duration: 0.4s; cursor: pointer; background-color: #555555; color: white; margin: 50px;">Apply
-						For Leave</a></li>
-				
-			</ul>
-
-		</nav>
-		<article>
-			<h1>Display</h1>
-			<p>Main content</p>
-		</article>
-	</section>
-	<footer>
-		<p>Footer</p>
-	</footer>
+	<a th:href="@{/Employee/submit}"
+		style="border: none; padding: 14px 33px; text-decoration: none; display: inline-block; font-size: 15px; margin: 3px 1px; cursor: pointer; background-color: #555555; color: white; margin: 40px;">Add
+		Employee</a>
+		
+	<br>
+	<a th:href="@{/Employee/leaves}"
+		style="border: none; padding: 14px 30px; text-decoration: none; display: inline-block; font-size: 15px; margin: 4px 2px; cursor: pointer; background-color: #555555; color: white; margin: 40px;">Apply
+		For Leave</a>
+	</br>
 </body>
 </html>
+
