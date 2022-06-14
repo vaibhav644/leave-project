@@ -12,45 +12,50 @@ table, tr {
 </head>
 <style>
 table tr th, table tr td {
-	padding: 5px;
+	padding: 3px;
 }
 </style>
 
-<body style="padding: 30px; font-family: arial;">
+<body
+	style="padding: 30px; background: #0f2439 no-repeat center top; font-family: arial;">
 
-	<table style="text-align: left; width: 100%; border: 1px solid green;">
+	<table style="text-align: left; width: auto; border: 3px solid black;">
 		<tr>
-			<th style="width: 12%; border: 1px solid darkblue; color: blue;"
+			<th
+				style="width: 12%; text-align: center; border: 1px solid darkblue; color: #172779;"
 				bgcolor="#ccc">ID</th>
-			<th style="width: 12%; border: 1px solid darkblue; color: blue;"
+			<th
+				style="width: 12%; text-align: center; border: 1px solid darkblue; color: #172779;"
 				bgcolor="#ccc">NAME</th>
-			<th style="width: 12%; border: 1px solid darkblue; color: blue;"
+			<th
+				style="width: 12%; text-align: center; border: 1px solid darkblue; color: #172779;"
 				bgcolor="#ccc">POST</th>
-			<th style="width: 12%; border: 1px solid darkblue; color: blue;"
+			<th
+				style="width: 12%; text-align: center; border: 1px solid darkblue; color: #172779;"
 				bgcolor="#ccc">E-Mail</th>
-			<th style="width: 12%; border: 1px solid darkblue; color: blue;"
+			<th
+				style="width: 12%; text-align: center; border: 1px solid darkblue; color: #172779;"
 				bgcolor="#ccc">MOBILE</th>
-			<th style="width: 12%; border: 1px solid darkblue; color: blue;"
+			<th
+				style="width: 12%; text-align: center; border: 1px solid darkblue; color: #172779;"
 				bgcolor="#ccc">SKYPE</th>
-
 		</tr>
-		
+
 		<tr th:each="employee : ${employees}">
-			<td style="width: 12%" bgcolor="lightgreen" th:text="${employee.id}"></td>
-			<td style="width: 12%" bgcolor="lightgreen"
+			<td style="width: 12%; text-align: center;" bgcolor="#6262CD"
+				th:text="${employee.id}"></td>
+			<td style="width: 12%; text-align: center;" bgcolor="#6262CD"
 				th:text="${employee.employeeName}"></td>
-			<td style="width: 12%" bgcolor="lightgreen"
+			<td style="width: 12%; text-align: center;" bgcolor="#6262CD"
 				th:text="${employee.employeePost}"></td>
-			<td style="width: 12%" bgcolor="lightgreen"
+			<td style="width: 12%; text-align: center;" bgcolor="#6262CD"
 				th:text="${employee.contactDetails.emailId}"></td>
-			<td style="width: 12%" bgcolor="lightgreen"
+			<td style="width: 12%; text-align: center;" bgcolor="#6262CD"
 				th:text="${employee.contactDetails.mobileNo}"></td>
-			<td style="width: 12%" bgcolor="lightgreen"
+			<td style="width: 12%; text-align: center;" bgcolor="#6262CD"
 				th:text="${employee.contactDetails.skypeId}"></td>
 		</tr>
-
-
 	</table>
-
 </body>
 </html>
+

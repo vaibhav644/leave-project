@@ -15,7 +15,7 @@ public class EmployeeHelper {
 	@Autowired
 	private EmployeeRepository repository;
 
-	public String getLeaveApproval(Employee employee, LeaveRequest request) {
+	public String getLeaveApproval(Employee employee, ApplyLeaveRequest request) {
 		String respString = "";
 		// TODO: need to build logic for this method
 //		int totalLeaves = employee.getEmployeeLeave();
@@ -23,7 +23,7 @@ public class EmployeeHelper {
 		if (request.getLeaveType().compareTo(LeaveTypeEnum.FULL_TIME) == 0) {
 			if (leavesLeft >= 2) {
 				respString = "Appproved";
-				leavesLeft = leavesLeft - 2;
+				leavesLeft = leavesLeft - (2*request.getLeaveDays());
 				employee.setEmployeeRemainingLeave(leavesLeft);
 				repository.save(updateEmployee(repository.getById(employee.getId()), employee));
 				Employee test = repository.getById(employee.getId());
@@ -38,7 +38,7 @@ public class EmployeeHelper {
 		} else if (request.getLeaveType().compareTo(LeaveTypeEnum.HALF_TIME) == 0) {
 			if (leavesLeft >= 1) {
 				respString = "Appproved";
-				leavesLeft = leavesLeft - 1;
+				leavesLeft = leavesLeft - (1*request.getLeaveDays());
 				employee.setEmployeeRemainingLeave(leavesLeft);
 				repository.save(updateEmployee(repository.getById(employee.getId()), employee));
 				Employee test = repository.getById(employee.getId());
