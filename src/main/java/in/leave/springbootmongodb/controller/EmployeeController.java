@@ -37,7 +37,12 @@ public class EmployeeController {
 	@PostMapping("/save")
 	public Employee create(@RequestBody Employee emp) {
 		emp.setEmployeeRemainingLeave(40);
-		return repository.save(emp);
+		if(employeeHelper.validateParams(emp)) {
+			return repository.save(emp);
+		}else {
+			throw new RuntimeException("asdfghjkl");
+		}
+		
 	}
 
 	@GetMapping("get/{id}")
@@ -88,6 +93,17 @@ public class EmployeeController {
 		modelAndView.getModel().put("employee", emp);
 		return modelAndView;
 	}
+	@PostMapping("/save/viaSubmitForm")
+	public ModelAndView saveViaSubmitPage(@ModelAttribute("employee") Employee employee, Model model) {
+		employee.setEmployeeRemainingLeave(40);
+		if(employeeHelper.validateParams(employee)) {
+		repository.save(employee);
+		ModelAndView modelAndView = new ModelAndView("xyz.html"); // succesfully submitted
+		return modelAndView;
+		}else {
+			throw new RuntimeException("asdfghjkl");
+		}
+	}
 
 	@GetMapping("/leaves")
 	public ModelAndView leaves(Model model) {
@@ -100,6 +116,9 @@ public class EmployeeController {
 	@PostMapping("/save/display")
 	public ModelAndView showUserList(@ModelAttribute("employee") Employee employee, Model model) {
 		employee.setEmployeeRemainingLeave(40);
+		if(employee== null || employee.getContactDetails() == null || employee.getEmployeeName() == null || employee.getEmployeePost() == null) {
+			throw new RuntimeException("Some parameters are missing");
+		}
 		repository.save(employee);
 		ModelAndView modelAndView = new ModelAndView("displayList.html");
 		modelAndView.getModel().put("employees", repository.findAll());

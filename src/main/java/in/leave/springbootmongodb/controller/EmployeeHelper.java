@@ -69,4 +69,23 @@ public class EmployeeHelper {
 		leaveStatusResp.setEmployeeRemainingLeave(employeeDetail.get().getEmployeeRemainingLeave());
 		return leaveStatusResp;
 	}
+	// TODO: validate request params 
+	public boolean validateParams(Employee employee) {
+		if(matchesRegex(employee.getEmployeeName(), "^[A-Za-z]\\\\w{5,29}$")){
+			if(matchesRegex(employee.getContactDetails().getMobileNo(), "123456789")) {
+//				if() {
+//					if() {
+//						
+//					}
+//				}
+			}
+		}
+		return false;
+	}
+	
+	public boolean matchesRegex(String s, String regex) {
+		// TODO:  
+		
+		return true;
+	}
 }

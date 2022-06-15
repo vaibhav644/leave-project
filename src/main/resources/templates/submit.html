@@ -28,37 +28,43 @@ table, tr {
 			<tr>
 
 				<td><input type="text" th:field="*{id}" placeholder="ID"
-					style="height: 35px; display: block; margin: auto; width: 250px; background-color: #3d4d685e; text-align: center; border-radius: 5px"></td>
+					style="height: 35px; display: block; margin: auto; width: 250px; background-color: #3d4d685e;
+					 text-align: center; border-radius: 5px" required pattern="[0-9]*$" ></td>
 			</tr>
 			<tr>
 
 				<td style="width: 12%; color: blue;"><input type="text"
 					th:field="*{employeeName}" placeholder="Name"
-					style="height: 35px; display: block; margin: auto; width: 250px; background-color: #3d4d685e; text-align: center; border-radius: 5px"></td>
+					style="height: 35px; display: block; margin: auto; width: 250px; background-color: #3d4d685e;
+					 text-align: center; border-radius: 5px"required pattern="[a-zA-Z]*$"></td>
 			</tr>
 			<tr>
 
 				<td style="width: 12%; color: blue;"><input type="text"
 					th:field="*{employeePost}" placeholder="Post"
-					style="height: 35px; display: block; margin: auto; width: 250px; background-color: #3d4d685e; text-align: center; border-radius: 5px"></td>
+					style="height: 35px; display: block; margin: auto; width: 250px; background-color: #3d4d685e; 
+					text-align: center; border-radius: 5px"required pattern="[a-zA-Z]*$"	></td>
 			</tr>
 			<tr>
 
 				<td style="width: 12%; color: blue;"><input type="text"
 					th:field="*{contactDetails.mobileNo}" placeholder="Contact"
-					style="height: 35px; display: block; margin: auto; width: 250px; background-color: #3d4d685e; text-align: center; border-radius: 5px"></td>
+					style="height: 35px; display: block; margin: auto; width: 250px; background-color: #3d4d685e;
+					 text-align: center; border-radius: 5px"required pattern="[0-9]{10}"></td>
 			</tr>
 			<tr>
 
-				<td style="width: 12%; color: blue;"><input type="text"
+					<td style="width: 12%; color: blue;"><input type="text"
 					th:field="*{contactDetails.emailId}" placeholder="Email"
-					style="height: 35px; display: block; margin: auto; width: 250px; background-color: #3d4d685e; text-align: center; border-radius: 5px"></td>
+					style="height: 35px; display: block; margin: auto; width: 250px; background-color: #3d4d685e;
+					 text-align: center; border-radius: 5px"required pattern= ^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$></td>
 			</tr>
 			<tr>
 
 				<td style="width: 12%; color: blue;"><input type="text"
 					th:field="*{contactDetails.skypeId}" placeholder="Skype_ID"
-					style="height: 35px; display: block; margin: auto; width: 250px; background-color: #3d4d685e; text-align: center; border-radius: 5px"></td>
+					style="height: 35px; display: block; margin: auto; width: 250px; background-color: #3d4d685e; 
+					text-align: center; border-radius: 5px"required pattern= ^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$></td>
 			</tr>
 
 
