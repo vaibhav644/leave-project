@@ -144,6 +144,14 @@ public class EmployeeController {
 		Optional<Employee> employeeDetail = repository.findById(request.getId());
 		return employeeHelper.getLeavesDetail(employeeDetail);
 	}
+//	@PostMapping("/save/display")
+//	public ModelAndView show(@ModelAttribute("employee") Employee employee, Model model) {
+//		employee.setEmployeeRemainingLeave(40);
+//		repository.save(employee);
+//		ModelAndView modelAndView = new ModelAndView("leaveStatus.html");
+//		modelAndView.getModel().put("employees", repository.findAll());
+//		return modelAndView;
+//	}
 
 	@PostMapping("/getApproval")
 	public String calculate(@ModelAttribute("applyLeaveRequest") ApplyLeaveRequest request, Model model) {

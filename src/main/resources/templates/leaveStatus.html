@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+<title>leave management system</title>
+<style>
+table, tr {
+	border: 1px solid black;
+}
+</style>
+</head>
+<style>
+table tr th, table tr td {
+	padding: 3px;
+}
+</style>
+
+<body
+	style="padding: 30px; background: #0f2439 no-repeat center top; font-family: arial;">
+	<table style="text-align: left; width: auto; border: 3px solid black;">
+		<tr>
+				<th
+				style="width: 12%; text-align: center; border: 1px solid darkblue; color: #172779;"
+				bgcolor="#ccc">TOTAL LEAVE</th>
+				<th
+				style="width: 12%; text-align: center; border: 1px solid darkblue; color: #172779;"
+				bgcolor="#ccc">LEAVE LEFT</th>
+				
+		</tr>
+<tr>
+				<td style="width: 12%; text-align: center;" bgcolor="#6262CD"
+				th:text="${employee.employeeRemainingLeave}"></td>
+				<td style="width: 12%; text-align: center;" bgcolor="#6262CD"
+				th:text="${employee. employeeLeave}"></td>
+		</tr>
+	</table>
+</div>	
+</body>
+</html>
+
