@@ -7,26 +7,174 @@
 
 <body
 	style="padding-top: 80px; padding-right: 120px; padding-bottom: 80px; padding-left:; color: #fff; background-color: #f0f0f0; background: #0f2439 no-repeat center top;">
-
+<table style="margin: auto; width: 391px;">
 
 	<p th:text="${Employee}"></p>
 	<h1 style="text-align: center">Virtue Analytics</h1>
 
 
-	<br>
-	<a th:href="@{/Employee/display}"
-		style="border: none; padding: 14px 50px; text-decoration: none; display: inline-block; font-size: 15px; margin: 4px 1px; cursor: pointer; background-color: #555555; color: white; margin: 40px;">ViewAll</a>
-	</br>
-
-	<a th:href="@{/Employee/submit}"
-		style="border: none; padding: 14px 33px; text-decoration: none; display: inline-block; font-size: 15px; margin: 3px 1px; cursor: pointer; background-color: #555555; color: white; margin: 40px;">Add
-		Employee</a>
+<tr>
+<td>
+	<a th:href="@{/Employee/display}">
+	<button style="margin: auto; display: block; background-color: #098cc8; width: 40%; height:50px"  id="myBtn">show all</button></a>
+	</td>
+	</tr>
+<tr>
+<td>
+	<a th:href="@{/Employee/submit}">
+	<button
+		style="margin: auto; display: block; background-color: #098cc8; width: 40%; height: 50px"  id="submit">Add Employee</button></a>
+		<td>
+		</tr>
 		
-	<br>
-	<a th:href="@{/Employee/leaves}"
-		style="border: none; padding: 14px 30px; text-decoration: none; display: inline-block; font-size: 15px; margin: 4px 2px; cursor: pointer; background-color: #555555; color: white; margin: 40px;">Apply
-		For Leave</a>
-	</br>
+	<tr>
+	<td th:href="@{/Employee/leaves}">
+	<button
+		style="margin: auto; display: block; background-color: #098cc8; width: 40%; height: 50px"  id="leave">Apply	For Leave</button></td>
+		</tr>
+		</table>
+		<style>
+body {font-family: Arial, Helvetica, sans-serif;}
+
+/* The Modal (background) */
+.modal {
+  display: block; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+</style>
+</head>
+<body>
+
+<h2></h2>
+
+<!-- Trigger/Open The Modal -->
+
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <p><table style="text-align: left; width: auto; border: 3px solid black;">
+		<tr>
+			<th
+				style="width: 12%; text-align: center; border: 1px solid darkblue; color: #172779;"
+				bgcolor="#ccc">ID</th>
+			<th
+				style="width: 12%; text-align: center; border: 1px solid darkblue; color: #172779;"
+				bgcolor="#ccc">NAME</th>
+			<th
+				style="width: 12%; text-align: center; border: 1px solid darkblue; color: #172779;"
+				bgcolor="#ccc">POST</th>
+			<th
+				style="width: 12%; text-align: center; border: 1px solid darkblue; color: #172779;"
+				bgcolor="#ccc">E-Mail</th>
+			<th
+				style="width: 12%; text-align: center; border: 1px solid darkblue; color: #172779;"
+				bgcolor="#ccc">MOBILE</th>
+			<th
+				style="width: 12%; text-align: center; border: 1px solid darkblue; color: #172779;"
+				bgcolor="#ccc">SKYPE</th>
+				<th
+				style="width: 12%; text-align: center; border: 1px solid darkblue; color: #172779;"
+				bgcolor="#ccc">LEAVE LEFT</th>
+				<th
+				style="width: 12%; text-align: center; border: 1px solid darkblue; color: #172779;"
+				bgcolor="#ccc">TOTAL LEAVE</th>
+				
+		</tr>
+		
+		
+
+		<tr th:each="employee : ${employees}">
+			<td style="width: 12%; text-align: center;" bgcolor="#6262CD"
+				th:text="${employee.id}"></td>
+			<td style="width: 12%; text-align: center;" bgcolor="#6262CD"
+				th:text="${employee.employeeName}"></td>
+			<td style="width: 12%; text-align: center;" bgcolor="#6262CD"
+				th:text="${employee.employeePost}"></td>
+			<td style="width: 12%; text-align: center;" bgcolor="#6262CD"
+				th:text="${employee.contactDetails.emailId}"></td>
+			<td style="width: 12%; text-align: center;" bgcolor="#6262CD"
+				th:text="${employee.contactDetails.mobileNo}"></td>
+			<td style="width: 12%; text-align: center;" bgcolor="#6262CD"
+				th:text="${employee.contactDetails.skypeId}"></td>
+				<td style="width: 12%; text-align: center;" bgcolor="#6262CD"
+				th:text="${employee.employeeRemainingLeave}"></td>
+				<td style="width: 12%; text-align: center;" bgcolor="#6262CD"
+				th:text="${employee. employeeLeave}"></td>
+			
+		</tr>
+	</table>
+    </div>
+</div>
+<script>
+var modal = document.getElementById("myModal");
+var btn = document.getElementById("myBtn");
+var span = document.getElementsByClassName("close")[0];
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+span.onclick = function() {
+  modal.style.display = "none";
+}
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>
+<script>
+var modal = document.getElementById("myModal");
+var btn = document.getElementById("submit");
+var span = document.getElementsByClassName("close")[0];
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+span.onclick = function() {
+  modal.style.display = "none";
+}
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>
+	
 </body>
 </html>
 

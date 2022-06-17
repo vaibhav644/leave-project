@@ -120,13 +120,14 @@ public class EmployeeController {
 			throw new RuntimeException("Some parameters are missing");
 		}
 		repository.save(employee);
-		ModelAndView modelAndView = new ModelAndView("displayList.html");
+		ModelAndView modelAndView = new ModelAndView("submit.html");
 		modelAndView.getModel().put("employees", repository.findAll());
 		return modelAndView;
+
 	}
 	@GetMapping("/display")
 	public ModelAndView showUserList() {
-		ModelAndView modelAndView = new ModelAndView("displayList.html");
+		ModelAndView modelAndView = new ModelAndView("main.html");
 		modelAndView.getModel().put("employees", repository.findAll());
 		return modelAndView;
 	}
@@ -142,24 +143,19 @@ public class EmployeeController {
 	public LeaveStatusResp getLeavesStatus(@ModelAttribute("applyLeaveRequest") ApplyLeaveRequest request,
 			Model model) {
 		Optional<Employee> employeeDetail = repository.findById(request.getId());
+		System.out.println();
 		return employeeHelper.getLeavesDetail(employeeDetail);
 	}
-//	@PostMapping("/save/display")
-//	public ModelAndView show(@ModelAttribute("employee") Employee employee, Model model) {
-//		employee.setEmployeeRemainingLeave(40);
-//		repository.save(employee);
-//		ModelAndView modelAndView = new ModelAndView("leaveStatus.html");
-//		modelAndView.getModel().put("employees", repository.findAll());
-//		return modelAndView;
-//	}
 
 	@PostMapping("/getApproval")
 	public String calculate(@ModelAttribute("applyLeaveRequest") ApplyLeaveRequest request, Model model) {
-		Employee employeeDetail = repository.getById(request.getId());
+ 		Employee employeeDetail = repository.getById(request.getId());
 		if (employeeDetail == null) {
 			throw new RuntimeException(String.format("ID = %s not found in Database", request.getId()));
 		}
 		return employeeHelper.getLeaveApproval(employeeDetail, request);
 	}
-
+	
 }
+
+

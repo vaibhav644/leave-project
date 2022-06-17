@@ -17,13 +17,15 @@ public class EmployeeHelper {
 
 	public String getLeaveApproval(Employee employee, ApplyLeaveRequest request) {
 		String respString = "";
-		// TODO: need to build logic for this method
 //		int totalLeaves = employee.getEmployeeLeave();
 		int leavesLeft = employee.getEmployeeRemainingLeave();
 		if (request.getLeaveType().compareTo(LeaveTypeEnum.FULL_TIME) == 0) {
 			if (leavesLeft >= 2) {
-				respString = "Appproved";
+				respString = String.format("leave approved for the employee with ID = %s with leaveleft %s",request.getId(), leavesLeft);
 				leavesLeft = leavesLeft - (2*request.getLeaveDays());
+				if(leavesLeft<0) {
+					return "not Approved";
+				}
 				employee.setEmployeeRemainingLeave(leavesLeft);
 				repository.save(updateEmployee(repository.getById(employee.getId()), employee));
 				Employee test = repository.getById(employee.getId());
@@ -37,9 +39,9 @@ public class EmployeeHelper {
 
 		} else if (request.getLeaveType().compareTo(LeaveTypeEnum.HALF_TIME) == 0) {
 			if (leavesLeft >= 1) {
-				respString = "Appproved";
 				leavesLeft = leavesLeft - (1*request.getLeaveDays());
 				employee.setEmployeeRemainingLeave(leavesLeft);
+				respString = String.format("leave approved for the employee with ID = %s with leaveleft %s",request.getId(), leavesLeft);
 				repository.save(updateEmployee(repository.getById(employee.getId()), employee));
 				Employee test = repository.getById(employee.getId());
 				int Y = test.getEmployeeRemainingLeave();
