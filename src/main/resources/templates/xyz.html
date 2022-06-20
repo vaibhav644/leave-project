@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>leave management system</title>
+
+
+</head>
+<style>
+table tr th, table tr td {
+	padding: 10px;
+}
+
+table, tr {
+	border: 3px solid black;
+}
+</style>
+<body
+	style="padding-top: 80px; padding-right: 120px; padding-bottom: 80px; padding-left: 120px; color: #fff; background-color: #f0f0f0; background: #0f2439 no-repeat center top;">
+
+	<h1 style="text-align: center">Employee Form</h1>
+	<p th:text="${Employee}"></p>
+	<form th:action="@{/Employee/save/viaSubmitForm}" th:object="${employee}"
+		method="post">
+		<h1>Success</h1>
+	</form>
+
+</body>
+</html>

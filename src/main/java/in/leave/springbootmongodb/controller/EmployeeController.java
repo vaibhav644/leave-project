@@ -45,7 +45,7 @@ public class EmployeeController {
 			return repository.save(emp);
 		} else {
 			throw new RuntimeException(resp.getMessage());
-		} 
+		}
 	}
 
 	@GetMapping("get/{id}")
