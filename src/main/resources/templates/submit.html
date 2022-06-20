@@ -27,12 +27,12 @@ table, tr {
 
 			<tr>
 
-				<td><input type="text" th:field="*{id}" placeholder="ID"
+				<td><input type="text" th:field="*{id}" placeholder="ID" pattern="[0-9]{3}"
 					style="height: 35px; display: block; margin: auto; width: 250px; background-color: #3d4d685e; text-align: center; border-radius: 5px"></td>
 			</tr>
 			<tr>
 
-				<td style="width: 12%; color: blue;"><input type="text"
+				<td style="width: 12%; color: blue;"><input type="text" 
 					th:field="*{employeeName}" placeholder="Name"
 					style="height: 35px; display: block; margin: auto; width: 250px; background-color: #3d4d685e; text-align: center; border-radius: 5px"></td>
 			</tr>

@@ -39,7 +39,13 @@ public class EmployeeController {
 	/********************** CRUD APIs *****************************/
 	@PostMapping("/save")
 	public Employee create(@RequestBody Employee emp) {
-		return repository.save(emp);
+		emp.setEmployeeRemainingLeave(40);
+		ValidateParamResp resp = employeeHelper.validateParams(emp);
+		if (resp.isValid()) {
+			return repository.save(emp);
+		} else {
+			throw new RuntimeException(resp.getMessage());
+		} 
 	}
 
 	@GetMapping("get/{id}")
@@ -50,7 +56,7 @@ public class EmployeeController {
 	}
 
 	@GetMapping("/findAll")
-//	@Cacheable(key = "id")
+	// @Cacheable(key = "id")
 	public List<Employee> findAll() {
 		return repository.findAll();
 	}
@@ -103,11 +109,25 @@ public class EmployeeController {
 
 	@PostMapping("/save/display")
 	public ModelAndView showUserList(@ModelAttribute("employee") Employee employee, Model model) {
-		repository.save(employee);
+		employee.setEmployeeRemainingLeave(40);
+		ValidateParamResp resp = employeeHelper.validateParams(employee);
+		if (resp.isValid()) {
+			repository.save(employee);
+		} else {
+			throw new RuntimeException(resp.getMessage());
+		}
+
 		ModelAndView modelAndView = new ModelAndView("displayList.html");
 		modelAndView.getModel().put("employees", repository.findAll());
 		return modelAndView;
 	}
+
+//	@PostMapping("/test/{str}")
+//	public boolean testRegexAPI(@PathVariable("str") String empId, @RequestBody String regex) {
+//		Optional<Employee> employee = getById(empId);
+//
+//		return employeeHelper.validateParams(employee.get());
+//	}
 
 	@GetMapping("/display")
 	public ModelAndView showUserList() {
@@ -119,7 +139,7 @@ public class EmployeeController {
 	@GetMapping("/main")
 	public ModelAndView main(Model model) {
 		ModelAndView modelAndView = new ModelAndView("main.html");
-			
+
 		return modelAndView;
 	}
 

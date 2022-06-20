@@ -39,6 +39,9 @@ table tr th, table tr td {
 			<th
 				style="width: 12%; text-align: center; border: 1px solid darkblue; color: #172779;"
 				bgcolor="#ccc">SKYPE</th>
+			<th
+				style="width: 12%; text-align: center; border: 1px solid darkblue; color: #172779;"
+				bgcolor="#ccc">Leaves Left</th>
 		</tr>
 
 		<tr th:each="employee : ${employees}">
@@ -54,6 +57,8 @@ table tr th, table tr td {
 				th:text="${employee.contactDetails.mobileNo}"></td>
 			<td style="width: 12%; text-align: center;" bgcolor="#6262CD"
 				th:text="${employee.contactDetails.skypeId}"></td>
+			<td style="width: 12%; text-align: center;" bgcolor="#6262CD"
+				th:text="${employee.employeeRemainingLeave}"></td>
 		</tr>
 	</table>
 </body>
