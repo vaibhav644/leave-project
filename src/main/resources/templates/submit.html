@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 
 <html xmlns:th="http://www.thymeleaf.org">
+<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
 
 <head>
 <title>leave management system</title>
@@ -16,14 +22,27 @@ table, tr {
 	border: 3px solid black;
 }
 </style>
-<body
+
+	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal2">show</button>
+   
+  <div id="myModal2" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+   <div class="modal-content"></div>
+ 
+        <button type="button" class="close" data-dismiss="modal">×</button>
+      </div>
+      
+       <p> 
+       
+       
+       <body
 	style="padding-top: 80px; padding-right: 120px; padding-bottom: 80px; padding-left: 120px; color: #fff; background-color: #f0f0f0; background: #0f2439 no-repeat center top;">
 
 	<h1 style="text-align: center">Employee Form</h1>
 	<p th:text="${Employee}"></p>
 	
 	
-	<form th:action="@{/Employee/save/display}" th:object="${employee}"
+	<form th:action="@{/Employee/save/displayAll}" th:object="${employee}"
 		method="post">
 		<table style="margin: auto; width: 391px;">
 
@@ -79,63 +98,55 @@ table, tr {
 		</table>
 		
 	</form>
-	<style> 
-body {font-family: Arial, Helvetica, sans-serif;}
+       </p>
+   
+  <form name="formLogin" id="myBtn"  method="post" >
+  <div class="modal-body">
 
-/* The Modal (background) */
-.modal {
-  display: block; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  padding-top: 100px; /* Location of the box */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-}
-
-/* Modal Content */
-.modal-content {
-  background-color: #fefefe;
-  margin: auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%;
-}
-
-/* The Close Button */
-.close {
-  color: #aaaaaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-  color: #000;
-  text-decoration: none;
-  cursor: pointer;
-}
-</style>
-</head>
-<body>
-
-<h2></h2>
-
-<!-- Trigger/Open The Modal -->
-
-
-<!-- The Modal -->
-<div id="myModal" class="modal">
-
-  <!-- Modal content -->
-  <div class="modal-content">
-    <span class="close">&times;</span>
-    <p><table style="text-align: left; width: auto; border: 3px solid black;">
+               
+ 
+        <script src="js/jquery.js"></script>
+        <script type="text/javascript">
+ 
+function doAjaxPost() {  
+      // get the form values  
+        var name = $('#Experiene').val();
+      var education = $('#Course').val();
+       alert(name+education)
+       
+      $.ajax({  
+        type: 'POST',  
+        url : "/login2",
+     
+        data: "name=" + name + "&education=" + education,
+        success: function(response){ 
+                     
+ 
+                alert(response)
+                //alert(jdata)
+          // we have the response  
+          $('#info').html(response);
+         },  
+        error: function(e){  
+           
+          alert('Error: ' + e);  
+        }  
+      });  
+    }  
+</script>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal2">show</button>
+   
+  <div id="myModal2" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+   <div class="modal-content"></div>
+ 
+        <button type="button" class="close" data-dismiss="modal">×</button>
+      </div>
+      
+       <p>
+       <body
+	style="padding: 30px; background: #0f2439 no-repeat center top; font-family: arial;">
+	<table style="text-align: left; width: auto; border: 3px solid black;">
 		<tr>
 			<th
 				style="width: 12%; text-align: center; border: 1px solid darkblue; color: #172779;"
@@ -163,8 +174,6 @@ body {font-family: Arial, Helvetica, sans-serif;}
 				bgcolor="#ccc">TOTAL LEAVE</th>
 				
 		</tr>
-		
-		
 
 		<tr th:each="employee : ${employees}">
 			<td style="width: 12%; text-align: center;" bgcolor="#6262CD"
@@ -185,26 +194,49 @@ body {font-family: Arial, Helvetica, sans-serif;}
 				th:text="${employee. employeeLeave}"></td>
 			
 		</tr>
-	</table></p>
-  </div>
-</div>
-<script>
-var modal = document.getElementById("myModal");
-var btn = document.getElementById("myBtn");
-var span = document.getElementsByClassName("close")[0];
-btn.onclick = function() {
-  modal.style.display = "block";
-}
-span.onclick = function() {
-  modal.style.display = "none";
-}
-window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-}
+	</table>
+</div>	
+</body>
+       
+       
+       
+       </p>
+   
+  <form name="formLogin" id="myBtn"  method="post" >
+  <div class="modal-body">
+
+               
+ 
+        <script src="js/jquery.js"></script>
+        <script type="text/javascript">
+ 
+function doAjaxPost() {  
+      // get the form values  
+        var name = $('#Experiene').val();
+      var education = $('#Course').val();
+       alert(name+education)
+       
+      $.ajax({  
+        type: 'POST',  
+        url : "/login2",
+     
+        data: "name=" + name + "&education=" + education,
+        success: function(response){ 
+                     
+ 
+                alert(response)
+                //alert(jdata)
+          // we have the response  
+          $('#info').html(response);
+         },  
+        error: function(e){  
+           
+          alert('Error: ' + e);  
+        }  
+      });  
+    }  
 </script>
-	
+
 
 </body>
 </html>

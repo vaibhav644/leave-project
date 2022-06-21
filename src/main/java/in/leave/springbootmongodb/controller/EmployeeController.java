@@ -37,12 +37,12 @@ public class EmployeeController {
 	@PostMapping("/save")
 	public Employee create(@RequestBody Employee emp) {
 		emp.setEmployeeRemainingLeave(40);
-		if(employeeHelper.validateParams(emp)) {
+		if (employeeHelper.validateParams(emp)) {
 			return repository.save(emp);
-		}else {
+		} else {
 			throw new RuntimeException("asdfghjkl");
 		}
-		
+
 	}
 
 	@GetMapping("get/{id}")
@@ -86,26 +86,15 @@ public class EmployeeController {
 	/************************** Other APIs*****************************8 */
 
 	// this api is rendering the submit form UI
-	@GetMapping("/submit")
+	@GetMapping("/getSubmitForm")
 	public ModelAndView findById(Model model) {
 		ModelAndView modelAndView = new ModelAndView("submit.html");
 		Employee emp = new Employee();
 		modelAndView.getModel().put("employee", emp);
 		return modelAndView;
 	}
-	@PostMapping("/save/viaSubmitForm")
-	public ModelAndView saveViaSubmitPage(@ModelAttribute("employee") Employee employee, Model model) {
-		employee.setEmployeeRemainingLeave(40);
-		if(employeeHelper.validateParams(employee)) {
-		repository.save(employee);
-		ModelAndView modelAndView = new ModelAndView("xyz.html"); // succesfully submitted
-		return modelAndView;
-		}else {
-			throw new RuntimeException("asdfghjkl");
-		}
-	}
 
-	@GetMapping("/leaves")
+	@GetMapping("/getApplyForLeaveForm")
 	public ModelAndView leaves(Model model) {
 		ModelAndView modelAndView = new ModelAndView("leave.html");
 		ApplyLeaveRequest applyLeaveRequest = new ApplyLeaveRequest();
@@ -113,49 +102,43 @@ public class EmployeeController {
 		return modelAndView;
 	}
 
-	@PostMapping("/save/display")
+	@PostMapping("/save/displayAll")
 	public ModelAndView showUserList(@ModelAttribute("employee") Employee employee, Model model) {
 		employee.setEmployeeRemainingLeave(40);
-		if(employee== null || employee.getContactDetails() == null || employee.getEmployeeName() == null || employee.getEmployeePost() == null) {
+		if (employee == null || employee.getContactDetails() == null || employee.getEmployeeName() == null
+				|| employee.getEmployeePost() == null) {
 			throw new RuntimeException("Some parameters are missing");
 		}
 		repository.save(employee);
-		ModelAndView modelAndView = new ModelAndView("submit.html");
+		ModelAndView modelAndView = new ModelAndView("displayList.html");
 		modelAndView.getModel().put("employees", repository.findAll());
 		return modelAndView;
 
 	}
-	@GetMapping("/display")
-	public ModelAndView showUserList() {
-		ModelAndView modelAndView = new ModelAndView("main.html");
-		modelAndView.getModel().put("employees", repository.findAll());
-		return modelAndView;
-	}
 
-	@GetMapping("/main")
+	@GetMapping("/getMainPage")
 	public ModelAndView main(Model model) {
 		ModelAndView modelAndView = new ModelAndView("main.html");
-			
+		modelAndView.addObject("applyLeaveRequest", new ApplyLeaveRequest());
 		return modelAndView;
 	}
 
-	@PostMapping("/getLeavesStatus")
-	public LeaveStatusResp getLeavesStatus(@ModelAttribute("applyLeaveRequest") ApplyLeaveRequest request,
-			Model model) {
-		Optional<Employee> employeeDetail = repository.findById(request.getId());
-		System.out.println();
-		return employeeHelper.getLeavesDetail(employeeDetail);
+	@GetMapping("/displayAllEmployee")
+	public ModelAndView showUserList() {
+		ModelAndView modelAndView = new ModelAndView("main.html");
+		modelAndView.addObject("applyLeaveRequest", new ApplyLeaveRequest());
+		modelAndView.getModel().put("employees", repository.findAll());
+		return modelAndView;
 	}
 
-	@PostMapping("/getApproval")
+	// this is is going to be called when
+	@PostMapping("/getLeaveApproval")
 	public String calculate(@ModelAttribute("applyLeaveRequest") ApplyLeaveRequest request, Model model) {
- 		Employee employeeDetail = repository.getById(request.getId());
+		Employee employeeDetail = repository.getById(request.getId());
 		if (employeeDetail == null) {
 			throw new RuntimeException(String.format("ID = %s not found in Database", request.getId()));
 		}
 		return employeeHelper.getLeaveApproval(employeeDetail, request);
 	}
-	
+
 }
-
-

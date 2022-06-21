@@ -7,174 +7,327 @@
 
 <body
 	style="padding-top: 80px; padding-right: 120px; padding-bottom: 80px; padding-left:; color: #fff; background-color: #f0f0f0; background: #0f2439 no-repeat center top;">
-<table style="margin: auto; width: 391px;">
-
-	<p th:text="${Employee}"></p>
-	<h1 style="text-align: center">Virtue Analytics</h1>
+	<table style="margin: auto; width: 391px;">
 
 
-<tr>
-<td>
-	<a th:href="@{/Employee/display}">
-	<button style="margin: auto; display: block; background-color: #098cc8; width: 40%; height:50px"  id="myBtn">show all</button></a>
-	</td>
-	</tr>
-<tr>
-<td>
-	<a th:href="@{/Employee/submit}">
-	<button
-		style="margin: auto; display: block; background-color: #098cc8; width: 40%; height: 50px"  id="submit">Add Employee</button></a>
-		<td>
+		<tr>
+			<td><a th:href="@{/Employee/displayAllEmployee}">
+					<button
+						style="margin: auto; display: block; background-color: #098cc8; width: 40%; height: 50px"
+						id="myBtn">show all</button>
+			</a></td>
 		</tr>
-		
-	<tr>
-	<td th:href="@{/Employee/leaves}">
-	<button
-		style="margin: auto; display: block; background-color: #098cc8; width: 40%; height: 50px"  id="leave">Apply	For Leave</button></td>
+		<tr>
+			<td><a th:href="@{/Employee/getSubmitForm}">
+					<button
+						style="margin: auto; display: block; background-color: #098cc8; width: 40%; height: 50px"
+						id="submit">Add Employee</button>
+			</a>
+			<td>
 		</tr>
-		</table>
-		<style>
-body {font-family: Arial, Helvetica, sans-serif;}
+
+		<tr>
+			<td><a th:href="@{/Employee/getApplyForLeaveForm}">
+					<button
+						style="margin: auto; display: block; background-color: #098cc8; width: 40%; height: 50px"
+						id="leave">Apply For Leave</button>
+			</a></td>
+		</tr>
+	</table>
+	<style>
+body {
+	font-family: Arial, Helvetica, sans-serif;
+}
 
 /* The Modal (background) */
 .modal {
-  display: block; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  padding-top: 100px; /* Location of the box */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+	display: visible; /* Hidden by default */
+	position: fixed; /* Stay in place */
+	z-index: 1; /* Sit on top */
+	padding-top: 100px; /* Location of the box */
+	left: 0;
+	top: 0;
+	width: 100%; /* Full width */
+	height: 100%; /* Full height */
+	overflow: auto; /* Enable scroll if needed */
+	background-color: rgb(0, 0, 0); /* Fallback color */
+	background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
 }
 
 /* Modal Content */
 .modal-content {
-  background-color: #fefefe;
-  margin: auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%;
+	background-color: #008080;
+	margin: auto;
+	padding: 20px;
+	border: 1px solid #888;
+	width: 80%;
 }
 
 /* The Close Button */
 .close {
-  color: #aaaaaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
+	color: #aaaaaa;
+	float: right;
+	font-size: 28px;
+	font-weight: bold;
 }
 
-.close:hover,
-.close:focus {
-  color: #000;
-  text-decoration: none;
-  cursor: pointer;
+.close:hover, .close:focus {
+	color: #000;
+	text-decoration: none;
+	cursor: pointer;
 }
 </style>
 </head>
 <body>
 
-<h2></h2>
+	<h2></h2>
 
-<!-- Trigger/Open The Modal -->
+	<!-- Trigger/Open The Modal -->
 
 
-<!-- The Modal -->
-<div id="myModal" class="modal">
+	<!-- The Modal -->
+	<div id="myModal" class="modal">
 
-  <!-- Modal content -->
-  <div class="modal-content">
-    <span class="close">&times;</span>
-    <p><table style="text-align: left; width: auto; border: 3px solid black;">
-		<tr>
-			<th
-				style="width: 12%; text-align: center; border: 1px solid darkblue; color: #172779;"
-				bgcolor="#ccc">ID</th>
-			<th
-				style="width: 12%; text-align: center; border: 1px solid darkblue; color: #172779;"
-				bgcolor="#ccc">NAME</th>
-			<th
-				style="width: 12%; text-align: center; border: 1px solid darkblue; color: #172779;"
-				bgcolor="#ccc">POST</th>
-			<th
-				style="width: 12%; text-align: center; border: 1px solid darkblue; color: #172779;"
-				bgcolor="#ccc">E-Mail</th>
-			<th
-				style="width: 12%; text-align: center; border: 1px solid darkblue; color: #172779;"
-				bgcolor="#ccc">MOBILE</th>
-			<th
-				style="width: 12%; text-align: center; border: 1px solid darkblue; color: #172779;"
-				bgcolor="#ccc">SKYPE</th>
-				<th
-				style="width: 12%; text-align: center; border: 1px solid darkblue; color: #172779;"
-				bgcolor="#ccc">LEAVE LEFT</th>
-				<th
-				style="width: 12%; text-align: center; border: 1px solid darkblue; color: #172779;"
-				bgcolor="#ccc">TOTAL LEAVE</th>
-				
-		</tr>
-		
-		
+		<!-- Modal content -->
+		<div class="modal-content">
+			<span class="close">&times;</span>
+			<table
+				style="text-align: left; width: auto; border: 3px solid black;">
+				<tr>
+					<th
+						style="width: 12%; text-align: center; border: 1px solid darkblue; color: #172779;"
+						bgcolor="#ccc">ID</th>
+					<th
+						style="width: 12%; text-align: center; border: 1px solid darkblue; color: #172779;"
+						bgcolor="#ccc">NAME</th>
+					<th
+						style="width: 12%; text-align: center; border: 1px solid darkblue; color: #172779;"
+						bgcolor="#ccc">POST</th>
+					<th
+						style="width: 12%; text-align: center; border: 1px solid darkblue; color: #172779;"
+						bgcolor="#ccc">E-Mail</th>
+					<th
+						style="width: 12%; text-align: center; border: 1px solid darkblue; color: #172779;"
+						bgcolor="#ccc">MOBILE</th>
+					<th
+						style="width: 12%; text-align: center; border: 1px solid darkblue; color: #172779;"
+						bgcolor="#ccc">SKYPE</th>
+					<th
+						style="width: 12%; text-align: center; border: 1px solid darkblue; color: #172779;"
+						bgcolor="#ccc">LEAVE LEFT</th>
+					<th
+						style="width: 12%; text-align: center; border: 1px solid darkblue; color: #172779;"
+						bgcolor="#ccc">TOTAL LEAVE</th>
 
-		<tr th:each="employee : ${employees}">
-			<td style="width: 12%; text-align: center;" bgcolor="#6262CD"
-				th:text="${employee.id}"></td>
-			<td style="width: 12%; text-align: center;" bgcolor="#6262CD"
-				th:text="${employee.employeeName}"></td>
-			<td style="width: 12%; text-align: center;" bgcolor="#6262CD"
-				th:text="${employee.employeePost}"></td>
-			<td style="width: 12%; text-align: center;" bgcolor="#6262CD"
-				th:text="${employee.contactDetails.emailId}"></td>
-			<td style="width: 12%; text-align: center;" bgcolor="#6262CD"
-				th:text="${employee.contactDetails.mobileNo}"></td>
-			<td style="width: 12%; text-align: center;" bgcolor="#6262CD"
-				th:text="${employee.contactDetails.skypeId}"></td>
-				<td style="width: 12%; text-align: center;" bgcolor="#6262CD"
-				th:text="${employee.employeeRemainingLeave}"></td>
-				<td style="width: 12%; text-align: center;" bgcolor="#6262CD"
-				th:text="${employee. employeeLeave}"></td>
-			
-		</tr>
-	</table>
-    </div>
-</div>
-<script>
-var modal = document.getElementById("myModal");
-var btn = document.getElementById("myBtn");
-var span = document.getElementsByClassName("close")[0];
-btn.onclick = function() {
-  modal.style.display = "block";
-}
-span.onclick = function() {
-  modal.style.display = "none";
-}
-window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-}
-</script>
-<script>
-var modal = document.getElementById("myModal");
-var btn = document.getElementById("submit");
-var span = document.getElementsByClassName("close")[0];
-btn.onclick = function() {
-  modal.style.display = "block";
-}
-span.onclick = function() {
-  modal.style.display = "none";
-}
-window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-}
-</script>
+				</tr>
+
+
+
+				<tr th:each="employee : ${employees}">
+					<td style="width: 12%; text-align: center;" bgcolor="#6262CD"
+						th:text="${employee.id}"></td>
+					<td style="width: 12%; text-align: center;" bgcolor="#6262CD"
+						th:text="${employee.employeeName}"></td>
+					<td style="width: 12%; text-align: center;" bgcolor="#6262CD"
+						th:text="${employee.employeePost}"></td>
+					<td style="width: 12%; text-align: center;" bgcolor="#6262CD"
+						th:text="${employee.contactDetails.emailId}"></td>
+					<td style="width: 12%; text-align: center;" bgcolor="#6262CD"
+						th:text="${employee.contactDetails.mobileNo}"></td>
+					<td style="width: 12%; text-align: center;" bgcolor="#6262CD"
+						th:text="${employee.contactDetails.skypeId}"></td>
+					<td style="width: 12%; text-align: center;" bgcolor="#6262CD"
+						th:text="${employee.employeeRemainingLeave}"></td>
+					<td style="width: 12%; text-align: center;" bgcolor="#6262CD"
+						th:text="${employee. employeeLeave}"></td>
+
+				</tr>
+			</table>
+		</div>
+	</div>
+
+	<!-- Trigger/Open The Modal -->
+
+
+	<!-- The Modal -->
+	<div id="myModal1" class="modal">
+
+		<!-- Modal content -->
+		<div class="modal-content">
+			<span class="close">&times;</span>
+
+			<p th:text="${ApplyLeaveRequest}"></p>
+			<form th:action="@{/Employee/getLeaveApproval}"
+				th:object="${applyLeaveRequest}" method="post">
+				<table style="margin: auto; width: 391px;">
+
+					<tr>
+
+						<td style="width: 12%; color: blue;"><input type="text"
+							th:field="*{id}" placeholder="ID"
+							style="height: 35px; display: block; margin: auto; width: 250px; background-color: #3d4d685e; text-align: center; border-radius: 5px"></td>
+
+					</tr>
+					<tr>
+
+						<td style="width: 12%; color: blue;"><input type="text"
+							th:field="*{leaveDays}" placeholder="Days"
+							style="height: 35px; display: block; margin: auto; width: 250px; background-color: #3d4d685e; text-align: center; border-radius: 5px"></td>
+					</tr>
+					<tr>
+
+						<td style="width: 12%; color: blue; display: block; margin: auto;">
+							<select name="leaveType"
+							style="height: 35px; display: block; margin: auto; width: 123px; background-color: #3d4d685e; text-align: center; border-radius: 5px; margin-left: -30px;">
+								<option value="--select--" disabled selected>Leave Type</option>
+								<option
+									th:each="leaveOpt : ${T(in.leave.springbootmongodb.model.LeaveTypeEnum).values()}"
+									th:value="${leaveOpt}" th:text="${leaveOpt}"></option>
+						</select>
+						</td>
+					</tr>
+					<tr>
+						<td><input type="submit"
+							style="border-radius: 5px; background-color: #098cc8; margin: auto; display: block; width: 99%; height: 38px;"
+							value="submit"></td>
+					</tr>
+				</table>
+			</form>
+		</div>
+	</div>
+	<!-- Trigger/Open The Modal -->
+
+
+	<!-- The Modal -->
+	<div id="myModal2" class="modal">
+
+		<!-- Modal content -->
+		<div class="modal-content">
+			<span class="close">&times;</span>
+			<p>
+			<h1 style="text-align: center">Employee Form</h1>
+
+			<p th:text="${Employee}"></p>
+
+
+			<form th:action="@{/Employee/save/display}" th:object="${employee}"
+				method="post">
+				<table style="margin: auto; width: 391px;">
+
+					<tr>
+
+						<td><input type="text" td:field="*{id}" placeholder="ID"
+							style="height: 35px; display: block; margin: auto; width: 250px; background-color: #3d4d685e; text-align: center; border-radius: 5px"
+							required pattern="[0-9]*$"></td>
+					</tr>
+					<tr>
+
+						<td style="width: 12%; color: blue;"><input type="text"
+							td:field="*{employeeName}" placeholder="NAME"
+							style="height: 35px; display: block; margin: auto; width: 250px; background-color: #3d4d685e; text-align: center; border-radius: 5px"
+							required pattern="[a-zA-Z]*$"></td>
+					</tr>
+					<tr>
+
+						<td style="width: 12%; color: blue;"><input type="text"
+							td:field="*{employeePost}" placeholder="POST"
+							style="height: 35px; display: block; margin: auto; width: 250px; background-color: #3d4d685e; text-align: center; border-radius: 5px"
+							required pattern="[a-zA-Z]*$"></td>
+					</tr>
+					<tr>
+
+						<td style="width: 12%; color: blue;"><input type="text"
+							td:field="*{contactDetails.mobileNo}" placeholder="MOBILE NO"
+							style="height: 35px; display: block; margin: auto; width: 250px; background-color: #3d4d685e; text-align: center; border-radius: 5px"
+							required pattern="[0-9]{10}"></td>
+					</tr>
+					<tr>
+
+						<td style="width: 12%; color: blue;"><input type="text"
+							td:field="*{contactDetails.emailId}" placeholder="EMAIL-ID"
+							style="height: 35px; display: block; margin: auto; width: 250px; background-color: #3d4d685e; text-align: center; border-radius: 5px"
+							required
+							pattern=^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$></td>
+					</tr>
+					<tr>
+
+						<td style="width: 12%; color: blue;"><input type="text"
+							td:field="*{contactDetails.skypeId}" placeholder="SKYPE-ID"
+							style="height: 35px; display: block; margin: auto; width: 250px; background-color: #3d4d685e; text-align: center; border-radius: 5px"
+							required
+							pattern=^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$></td>
+					</tr>
+
+					<tr>
+						<td>
+							<button
+								style="margin: auto; display: block; background-color: #098cc8; width: 98%; height: 35px"
+								id="myBtn">submit</button>
+						</td>
+					</tr>
+
+				</table>
+
+			</form>
+			</p>
+		</div>
+	</div>
+
+
+
+
+	<script> 
 	
+// Get the modal 
+var modal = document.getElementById("myModal");
+// Get the button that opens the modal 
+var btn = document.getElementById("myBtn");
+// Get the <span> element that closes the modal 
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal  
+btn.onclick = function() {   modal.style.display = "block"; }
+
+// When the user clicks on <span> (x), close the modal 
+span.onclick = function() {   modal.style.display = "none"; }
+
+// When the user clicks anywhere outside of the modal, close it 
+window.onclick = function(event) {   
+    if (event.target == modal) {
+        modal.style.display = "none";   
+} } 
+</script>
+	<script>
+var modal1 = document.getElementById("myModal1");
+var btn1 = document.getElementById("leave");
+var span1 = document.getElementsByClassName("close")[1];
+btn1.onclick = function() {
+  modal1.style.display = "block";
+}
+span1.onclick = function() {
+  modal1.style.display = "none";
+}
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal1.style.display = "none";
+  }
+}
+</script>
+	<script>
+var modal2 = document.getElementById("myModal2");
+var btn2 = document.getElementById("submit");
+var span2 = document.getElementsByClassName("close")[2];
+btn2.onclick = function() {
+  modal2.style.display = "block";
+}
+span2.onclick = function() {
+  modal2.style.display = "none";
+}
+window.onclick = function(event) {
+  if (event.target == moda2) {
+    modal2.style.display = "none";
+  }
+}
+</script>
 </body>
 </html>
-
